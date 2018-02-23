@@ -1,0 +1,19 @@
+{
+    "yearBal":0,
+    "monthBal":0,
+    "weekBal":0,
+    "biweekBal":0,
+    "dayBal":0,
+
+    "yearExp":0,
+    "monthExp":0,
+    "weekExp":0,
+    "biweekExp":0,
+    "dayExp":0,
+
+    "yearInc":0,
+    "monthInc":0,
+    "weekInc":0,
+    "biweekInc":0,
+    "dayInc":0
+}

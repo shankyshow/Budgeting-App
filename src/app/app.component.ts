@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import * as dashboard from '../dashboard.json';
 
 @Component({
   selector: 'app-root',
@@ -9,85 +10,67 @@ export class AppComponent {
   title = 'Shanky`s App for Budgeting & Personal Finance';
   selectDefault = 1;
 
-  yearBal = 0;
-  monthBal = 0;
-  weekBal = 0;
-  biweekBal = 0;
-  dayBal = 0;
-
-  yearExp = 0;
-  monthExp = 0;
-  weekExp = 0;
-  biweekExp = 0;
-  dayExp = 0;
-
-  yearInc = 0;
-  monthInc = 0;
-  weekInc = 0;
-  biweekInc = 0;
-  dayInc = 0;
-
 /* Main Balance Summary */
   getYearBal(): number {
-    return this.yearBal;
+    return (<any>dashboard).yearBal;
   }
 
   getMonthBal(): number {
-    return this.monthBal;
+    return (<any>dashboard).monthBal;
   }
 
   getWeekBal(): number {
-    return this.weekBal;
+    return (<any>dashboard).weekBal;
   }
 
   getBiWeekBal(): number {
-    return this.biweekBal;
+    return (<any>dashboard).biweekBal;
   }
 
   getDayBal(): number {
-    return this.dayBal;
+    return (<any>dashboard).dayBal;
   }
 
 /* Expense Summary */
   getYearExp(): number {
-    return this.yearExp;
+    return (<any>dashboard).yearExp;
   }
 
   getMonthExp(): number {
-    return this.monthExp;
+    return (<any>dashboard).monthExp;
   }
 
   getWeekExp(): number {
-    return this.weekExp;
+    return (<any>dashboard).weekExp;
   }
 
   getBiWeekExp(): number {
-    return this.weekExp;
+    return (<any>dashboard).weekExp;
   }
 
   getDayExp(): number {
-    return this.dayExp;
+    return (<any>dashboard).dayExp;
   }
 
 /* Income Summary */
   getYearInc(): number {
-    return this.yearInc;
+    return (<any>dashboard).yearInc;
   }
 
   getMonthInc(): number {
-    return this.monthInc;
+    return (<any>dashboard).monthInc;
   }
 
   getWeekInc(): number {
-    return this.weekInc;
+    return (<any>dashboard).weekInc;
   }
 
   getBiWeekInc(): number {
-    return this.weekInc;
+    return (<any>dashboard).weekInc;
   }
 
   getDayInc(): number {
-    return this.dayInc;
+    return (<any>dashboard).dayInc;
   }
 
 }
