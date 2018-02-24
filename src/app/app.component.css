@@ -1,10 +1,23 @@
-.tab-group-header {
-    border: 1px solid #e8e8e8;
+.mainCard {
+    max-width: 100%;
 }
-  .tab-group {
-    border: 1px solid #e8e8e8;
+.firstTile {
+    background-color:rgb(20, 149, 255);
 }
-.amount{
+.loginHeader {
     text-align: center;
+    color: snow;
+    font-size: 100%;
+}
+.loginButton {
+    background-color:rgb(20, 149, 255);
+    color: snow;
+}
+.mainForm {
+    min-width: 150px;
+    max-width: 500px;
+    width: 100%;
+}
+.formFullWidth {
     width: 100%;
 }
