@@ -1,0 +1,13 @@
+  <mat-grid-tile [colspan]="3" [rowspan]="1" *ngIf="user">
+    {{user.displayName}} is ready to start penny pinching
+  </mat-grid-tile>
+  <mat-grid-tile [colspan]="1" [rowspan]="1"></mat-grid-tile>
+  <mat-grid-tile [colspan]="1" [rowspan]="1" *ngIf="user">
+      <button mat-raised-button class="loginoutButton" (click)="logout();">Logout</button>
+  </mat-grid-tile>
+<mat-grid-tile [colspan]="1" [rowspan]="1"></mat-grid-tile>
+<mat-grid-tile [colspan]="3" [rowspan]="3" *ngIf="user">
+  Subscriber: {{user.roles?.subscriber ? true:false}}
+  Admin: {{user.roles?.admin ? true:false}}
+</mat-grid-tile>
+</mat-grid-list>

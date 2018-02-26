@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AfService } from '../providers/af.service';
-import { User } from '../providers/user';
+import { AngularFireAuth } from 'angularfire2/auth';
+import * as firebase from 'firebase/app';
 
 @Component({
   selector: 'app-login',
@@ -8,16 +8,17 @@ import { User } from '../providers/user';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  title = 'Shanky`s App for Budgeting & Personal Finance';
-  user: User;
 
-  constructor(public AfService: AfService) { }
+  constructor(public afAuth: AngularFireAuth) { }
 
   ngOnInit() {
-    this.AfService.user$.subscribe(user => this.user = user);
   }
+
   login() {
-    this.AfService.loginWithGoogle();
+    this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+  }
+  logout() {
+    this.afAuth.auth.signOut();
   }
 
 }

@@ -1,1 +1,32 @@
+<mat-card class="mainCard" *ngIf="afAuth.authState | async as user; else showLogin">
+        <mat-grid-list cols="5" rowHeight="100px" class="primary">
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <button mat-icon-button><mat-icon aria-label="Menu Button">menu</mat-icon></button>
+            </mat-grid-tile>
+            <mat-grid-tile [colspan]="3" [rowspan]="1">
+                <mat-card-header class="loginHeader">{{ title }}</mat-card-header>
+            </mat-grid-tile>
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <button mat-icon-button><mat-icon aria-label="Logout Button" (click)="logout();">power_settings_new</mat-icon></button>
+            </mat-grid-tile>
+        </mat-grid-list>
 <router-outlet></router-outlet>
+</mat-card>
+
+<ng-template #showLogin>
+    <mat-card class="mainCard">
+            <mat-grid-list cols="5" rowHeight="100px" class="primary">
+                <mat-grid-tile [colspan]="1" [rowspan]="1"></mat-grid-tile>
+                <mat-grid-tile [colspan]="3" [rowspan]="1">
+                    <mat-card-header class="loginHeader">{{ title }}</mat-card-header>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1"></mat-grid-tile>
+            </mat-grid-list>
+    </mat-card>
+    <mat-grid-list cols="3" rowHeight="100px">
+            <mat-grid-tile [colspan]="1" [rowspan]="1"></mat-grid-tile>
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <button mat-raised-button class="primary" (click)="login();">Login with Google</button>
+            </mat-grid-tile>
+    </mat-grid-list>
+</ng-template>
