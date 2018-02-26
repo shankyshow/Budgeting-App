@@ -1,5 +1,10 @@
 /* You can add global styles to this file, and also import other style files */
-@import "~@angular/material/prebuilt-themes/indigo-pink.css";
+@import "./assets/shankys-theme.css";
+
+.primary {
+    background-color:#01bad4;
+    color: snow;
+}
 
 .mat-tab-labels{
     justify-content: center; /* align items in Main Axis */
@@ -10,18 +15,9 @@
 .mainCard {
     max-width: 100%;
 }
-.firstTile {
-    background-color:#01bad4;
-    color: snow;
-}
 .loginHeader {
     text-align: center;
-    color: snow;
     font-size: 100%;
-}
-.loginoutButton {
-    background-color:#01bad4;
-    color: snow;
 }
 .mainForm {
     min-width: 150px;
@@ -34,7 +30,7 @@
 .tab-group-header {
     border: 1px solid #e8e8e8;
 }
-  .tab-group {
+.tab-group {
     border: 1px solid #e8e8e8;
 }
 .amount{
