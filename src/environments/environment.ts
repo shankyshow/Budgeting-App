@@ -9,6 +9,7 @@ export const environment = {
     apiKey: 'AIzaSyAMPnPgfYGQlFJ8m20NbnMpb_AfsLR8GGE',
     authDomain: 'shankysapp.firebaseapp.com',
     databaseURL: 'https://shankysapp.firebaseio.com',
+    projectId: 'shankysapp',
     storageBucket: 'shankysapp.appspot.com',
     messagingSenderId: '531247272229'
   }

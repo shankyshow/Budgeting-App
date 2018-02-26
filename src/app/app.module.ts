@@ -4,7 +4,7 @@ import { MaterialModule } from './material.module';
 import { FormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AngularFireModule } from 'angularfire2';
-import { AngularFirestoreModule } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { environment } from '../environments/environment';
@@ -20,6 +20,7 @@ import { SignupComponent } from './signup/signup.component';
 import { MembersComponent } from './members/members.component';
 
 import { AppRoutingModule } from './app-routing/app-routing.module';
+import { AfService } from './providers/af.service';
 
 @NgModule({
   declarations: [
@@ -43,8 +44,9 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
     AngularFirestoreModule.enablePersistence(),
     AngularFireStorageModule,
     AppRoutingModule,
+    AngularFireAuthModule
   ],
-  providers: [],
+  providers: [AfService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
