@@ -1,4 +1,6 @@
 {
+    "defTab":1,
+
     "yearBal":0,
     "monthBal":0,
     "weekBal":0,
@@ -11,9 +13,21 @@
     "biweekExp":0,
     "dayExp":0,
 
+    "yearStat":0,
+    "monthStat":0,
+    "weekStat":0,
+    "biweekStat":0,
+    "dayStat":0,
+
     "yearInc":0,
     "monthInc":0,
     "weekInc":0,
     "biweekInc":0,
-    "dayInc":0
+    "dayInc":0,
+
+    "yearCol":0,
+    "monthCol":0,
+    "weekCol":0,
+    "biweekCol":0,
+    "dayCol":0
 }
