@@ -2,26 +2,6 @@
     display: none;
 }
 
-.email-container {
-    display: flex;
-    flex-direction: column;
-}
-
-.email-container button {
-    margin-bottom: 10px;
-}
-  
-.email-container > * {
-width: 100%;
-}
-
-.password-container {
-    display: flex;
-    flex-direction: column;
-  }
-.password-container > * {
-width: 100%;
-}
 
 .afButton{
     width: 100%;

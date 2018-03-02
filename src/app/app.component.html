@@ -1,4 +1,4 @@
-<mat-card class="mainCard" *ngIf="afAuth.authState | async as user; else showLogin">
+<mat-card *ngIf="afAuth.authState | async as user; else showLogin">
     <mat-grid-list cols="5" rowHeight="100px" class="primary">
         <mat-grid-tile [colspan]="1" [rowspan]="1">
             <button mat-icon-button [matMenuTriggerFor]="menu">
@@ -40,9 +40,9 @@
     </mat-card>
     <mat-grid-list cols="1" rowHeight="50px">
         <mat-grid-tile [colspan]="1" [rowspan]="5">
-            <div class="email-container">
-                <button mat-raised-button color="primary" (click)="googleLogin();">Login with Google</button>
-                <button mat-raised-button color="primary" (click)="fbLogin();">Login with Facebook</button>
+            <div class="loginGrid">
+                <button mat-raised-button color="warn" (click)="googleLogin();">Login with Google</button>
+                <button mat-raised-button style="background-color:#3b5998; color:snow" (click)="fbLogin();">Login with Facebook</button>
                 <mat-form-field>
                     <input matInput placeholder="Enter your email" [formControl]="email" required>
                     <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
@@ -57,7 +57,10 @@
             <button mat-raised-button color="primary" (click)="emailLogin();">Login</button>
         </mat-grid-tile>
         <mat-grid-tile [colspan]="1" [rowspan]="1">
-            <button mat-button (click)="showSignup();">Sign Up</button>
+            <div class="separator-line"></div><div class="separator-text">New to this?</div><div class="separator-line"></div>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <button mat-raised-button color="accent" (click)="showSignup();">Sign Up</button>
         </mat-grid-tile>
     </mat-grid-list>
     <div id="signup_hidden"><app-signup></app-signup></div>

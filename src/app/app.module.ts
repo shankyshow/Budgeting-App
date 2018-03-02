@@ -7,6 +7,7 @@ import { AngularFireModule } from 'angularfire2';
 import { AngularFirestore, AngularFirestoreModule } from 'angularfire2/firestore';
 import { AngularFireStorageModule } from 'angularfire2/storage';
 import { AngularFireAuthModule } from 'angularfire2/auth';
+import { AuthService } from './services/auth.service';
 import { environment } from '../environments/environment';
 
 import { AppComponent } from './app.component';
@@ -15,7 +16,6 @@ import { ExpenseComponent } from './expense/expense.component';
 import { IncomeComponent } from './income/income.component';
 import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
-import { EmailComponent } from './email/email.component';
 import { SignupComponent } from './signup/signup.component';
 
 import { AppRoutingModule } from './app-routing/app-routing.module';
@@ -27,7 +27,6 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
     IncomeComponent,
     DashboardComponent,
     LoginComponent,
-    EmailComponent,
     SignupComponent
   ],
   imports: [
@@ -44,7 +43,7 @@ import { AppRoutingModule } from './app-routing/app-routing.module';
     AppRoutingModule,
     AngularFireAuthModule
   ],
-  providers: [],
+  providers: [AuthService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
