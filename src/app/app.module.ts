@@ -1,7 +1,7 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
 import { MaterialModule } from './material.module';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpModule } from '@angular/http';
 import { AngularFireModule } from 'angularfire2';
 import { AngularFirestore, AngularFirestoreModule } from 'angularfire2/firestore';
@@ -17,10 +17,8 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { LoginComponent } from './login/login.component';
 import { EmailComponent } from './email/email.component';
 import { SignupComponent } from './signup/signup.component';
-import { MembersComponent } from './members/members.component';
 
 import { AppRoutingModule } from './app-routing/app-routing.module';
-import { AfService } from './providers/af.service';
 
 @NgModule({
   declarations: [
@@ -30,14 +28,14 @@ import { AfService } from './providers/af.service';
     DashboardComponent,
     LoginComponent,
     EmailComponent,
-    SignupComponent,
-    MembersComponent
+    SignupComponent
   ],
   imports: [
     BrowserModule,
     BrowserAnimationsModule,
     MaterialModule,
     FormsModule,
+    ReactiveFormsModule,
     HttpModule,
     AngularFireModule.initializeApp(environment.firebase),
     AngularFireAuthModule,
@@ -46,7 +44,7 @@ import { AfService } from './providers/af.service';
     AppRoutingModule,
     AngularFireAuthModule
   ],
-  providers: [AfService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
