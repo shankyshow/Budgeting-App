@@ -1,6 +1,4 @@
 import { Component } from '@angular/core';
-import { AngularFireAuth } from 'angularfire2/auth';
-import * as firebase from 'firebase/app';
 import {FormControl, Validators} from '@angular/forms';
 import { AuthService } from './core/auth.service';
 
@@ -17,26 +15,9 @@ export class AppComponent {
 
   constructor(public auth: AuthService) {
   }
-  showSignup() {
-    document.getElementById('signup_hidden').style.display = 'inline';
-  }
-  googleLogin() {
-    this.auth.googleLogin();
-  }
-  fbLogin() {
-    this.auth.fbLogin();
-  }
-  emailLogin() {
-    this.auth.emailLogin();
-  }
 
   logout() {
     this.auth.signOut();
   }
 
-  getErrorMessage() {
-    return this.email.hasError('required') ? 'You must enter a value' :
-        this.email.hasError('email') ? 'Not a valid email' :
-            '';
-  }
 }

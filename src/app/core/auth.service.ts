@@ -13,7 +13,8 @@ interface User {
   email: string;
   photoURL?: string;
   displayName?: string;
-  favoriteColor?: string;
+  firstName?: string;
+  lastName?: string;
 }
 
 
@@ -37,7 +38,16 @@ export class AuthService {
         });
   }
 
-
+  emailSignUp(firstName: string, lastName: string, email: string, password: string) {
+    return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
+      .then(user => {
+        // this.updateUserData(user);
+        console.log(user);
+        user.firstName = firstName;
+        user.lastName = lastName;
+        return this.setUserDoc(user); // create initial user document
+      });
+  }
 
   googleLogin() {
     const provider = new firebase.auth.GoogleAuthProvider();
@@ -45,31 +55,51 @@ export class AuthService {
   }
 
   fbLogin() {
-    const provider = new firebase.auth.GoogleAuthProvider();
+    const provider = new firebase.auth.FacebookAuthProvider();
     return this.oAuthLogin(provider);
   }
 
   emailLogin() {
-    const provider = new firebase.auth.GoogleAuthProvider();
+    const provider = new firebase.auth.EmailAuthProvider();
     return this.oAuthLogin(provider);
+  }
+
+  // Update properties on the user document
+  updateUser(user: User, data: any) {
+    return this.afs.doc(`users/${user.uid}`).update(data);
   }
 
   private oAuthLogin(provider) {
     return this.afAuth.auth.signInWithPopup(provider)
       .then((credential) => {
+        credential.user.firstName = credential.user.displayName; // look for js split
         this.updateUserData(credential.user);
       });
   }
 
+  private setUserDoc(user) {
+
+    const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
+
+    const data: User = {
+      uid: user.uid,
+      email: user.email || null,
+      firstName: user.firstName,
+      lastName: user.lastName
+    };
+
+    return userRef.set(data);
+
+  }
 
   private updateUserData(user) {
     // Sets user data to firestore on login
 
-    const userRef: AngularFirestoreDocument<any> = this.afs.doc(`users/${user.uid}`);
+    const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
 
     const data: User = {
       uid: user.uid,
-      email: user.email,
+      email: user.email || null,
       displayName: user.displayName,
       photoURL: user.photoURL
     };

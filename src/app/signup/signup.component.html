@@ -2,24 +2,24 @@
     <mat-grid-tile [colspan]="1" [rowspan]="6">
         <div class="loginGrid">
             <mat-form-field>
-                <input matInput placeholder="First Name">
+                <input matInput placeholder="First Name" [(ngModel)]="firstName">
             </mat-form-field>
             <mat-form-field>
-                <input matInput placeholder="Last Name">
+                <input matInput placeholder="Last Name" [(ngModel)]="lastName">
             </mat-form-field>
             <mat-form-field>
-                <input matInput placeholder="Enter your email" [formControl]="email" required>
+                <input matInput placeholder="Enter your email" [formControl]="email" required [(ngModel)]="emailModel">
                 <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
             </mat-form-field>
             <mat-form-field>
-                <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'">
+                <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'" [(ngModel)]="passwordModel">
                 <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
             </mat-form-field>
             <mat-form-field>
-                <input matInput placeholder="Confirm your password" [type]="hide ? 'password' : 'text'">
+                <input matInput placeholder="Confirm your password" [type]="hide ? 'password' : 'text'" [(ngModel)]="confirmpasswordModel">
                 <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
             </mat-form-field>
-                <button mat-raised-button color="primary" (click)="emailLogin();" class="emailButton">Register</button>
+                <button mat-raised-button color="primary" (click)="emailSignUp();" class="emailButton">Register</button>
         </div>
     </mat-grid-tile>
 </mat-grid-list>

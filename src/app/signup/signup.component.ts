@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from 'angularfire2/auth';
+import { AuthService } from '../core/auth.service';
 import * as firebase from 'firebase/app';
 
 import {FormControl, Validators} from '@angular/forms';
@@ -13,14 +13,27 @@ export class SignupComponent implements OnInit {
   email = new FormControl('', [Validators.required, Validators.email]);
   hide = true;
 
-  constructor(public afAuth: AngularFireAuth) {
+  firstName: string;
+  lastName: string;
+  emailModel: string;
+  passwordModel: string;
+  confirmpasswordModel: string;
+
+  constructor(public auth: AuthService) {
   }
 
   ngOnInit() {
   }
 
-  emailLogin() {
-    this.afAuth.auth.signInWithPopup(new firebase.auth.EmailAuthProvider());
+  emailSignUp() {
+    this.auth.emailSignUp(this.firstName, this.lastName, this.emailModel, this.passwordModel).catch(() => {
+      console.log('Registration Failed');
+      this.firstName = '';
+      this.lastName = '';
+      this.emailModel = '';
+      this.passwordModel = '';
+      this.confirmpasswordModel = '';
+    });
   }
 
   getErrorMessage() {

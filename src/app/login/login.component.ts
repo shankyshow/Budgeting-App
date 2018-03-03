@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { AngularFireAuth } from 'angularfire2/auth';
-import * as firebase from 'firebase/app';
+import {FormControl, Validators} from '@angular/forms';
+import { AuthService } from '../core/auth.service';
 
 @Component({
   selector: 'app-login',
@@ -8,17 +8,38 @@ import * as firebase from 'firebase/app';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
+  title = 'Shanky`s App for Budgeting & Personal Finance';
 
-  constructor(public afAuth: AngularFireAuth) { }
+  email = new FormControl('', [Validators.required, Validators.email]);
+  hide = true;
+
+  constructor(public auth: AuthService) {
+  }
 
   ngOnInit() {
   }
 
-  login() {
-    this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+  showSignup() {
+    document.getElementById('signup_hidden').style.display = 'inline';
   }
+  googleLogin() {
+    this.auth.googleLogin();
+  }
+  fbLogin() {
+    this.auth.fbLogin();
+  }
+  emailLogin() {
+    this.auth.emailLogin();
+  }
+
   logout() {
-    this.afAuth.auth.signOut();
+    this.auth.signOut();
+  }
+
+  getErrorMessage() {
+    return this.email.hasError('required') ? 'You must enter a value' :
+        this.email.hasError('email') ? 'Not a valid email' :
+            '';
   }
 
 }
