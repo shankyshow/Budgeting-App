@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { AngularFireAuth } from 'angularfire2/auth';
 import * as firebase from 'firebase/app';
 import {FormControl, Validators} from '@angular/forms';
+import { AuthService } from './core/auth.service';
 
 @Component({
   selector: 'app-root',
@@ -14,28 +15,23 @@ export class AppComponent {
   email = new FormControl('', [Validators.required, Validators.email]);
   hide = true;
 
-  constructor(public afAuth: AngularFireAuth) {
+  constructor(public auth: AuthService) {
   }
   showSignup() {
     document.getElementById('signup_hidden').style.display = 'inline';
   }
-  emailLogin() {
-    this.afAuth.auth.signInWithPopup(new firebase.auth.EmailAuthProvider());
-  }
   googleLogin() {
-    this.afAuth.auth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+    this.auth.googleLogin();
   }
   fbLogin() {
-    this.afAuth.auth.signInWithPopup(new firebase.auth.FacebookAuthProvider());
+    this.auth.fbLogin();
   }
-  emailLogout() {
-    this.afAuth.auth.signOut();
+  emailLogin() {
+    this.auth.emailLogin();
   }
-  googleLogout() {
-    this.afAuth.auth.signOut();
-  }
-  fbLogout() {
-    this.afAuth.auth.signOut();
+
+  logout() {
+    this.auth.signOut();
   }
 
   getErrorMessage() {
