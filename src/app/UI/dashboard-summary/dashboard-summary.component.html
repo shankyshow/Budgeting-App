@@ -1,0 +1,8 @@
+<div *ngIf="userOrderExpCheck()">
+    <app-expense-summary></app-expense-summary>
+    <app-income-summary></app-income-summary>
+  </div>
+  <div *ngIf="userOrderIncCheck()">
+    <app-income-summary></app-income-summary>  
+    <app-expense-summary></app-expense-summary>
+  </div>

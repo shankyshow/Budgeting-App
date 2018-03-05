@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
-  selector: 'app-expense-add',
-  templateUrl: './expense-add.component.html',
-  styleUrls: ['./expense-add.component.css']
+  selector: 'app-income-add',
+  templateUrl: './income-add.component.html',
+  styleUrls: ['./income-add.component.css']
 })
-export class ExpenseAddComponent implements OnInit {
+export class IncomeAddComponent implements OnInit {
 
   thisPage = true;
 

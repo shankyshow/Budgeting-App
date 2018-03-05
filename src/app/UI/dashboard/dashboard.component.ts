@@ -10,12 +10,6 @@ export class DashboardComponent implements OnInit {
   userTab(): number {
     return (<any>dashboard).defTab;
   }
-  userOrderExpCheck(): number {
-    return (<any>dashboard).expSumFirst;
-  }
-  userOrderIncCheck(): number {
-    return (<any>dashboard).incSumFirst;
-  }
 
   // tslint:disable-next-line:member-ordering
   expenseAdd = false;

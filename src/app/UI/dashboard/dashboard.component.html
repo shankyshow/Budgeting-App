@@ -5,85 +5,85 @@
       <mat-tab label="Year">
         <mat-grid-list cols="3" rowHeight="100px">
           <mat-grid-tile [colspan]="1" [rowspan]="1">
-              <button mat-icon-button color="primary">
-                <mat-icon aria-label="Icon Button with a plus symbol">add</mat-icon>
-              </button>
+              <a routerLink="/addincome"><button mat-icon-button color="primary">
+                  <mat-icon aria-label="Icon Button with a plus symbol">add</mat-icon>
+                </button></a>
           </mat-grid-tile>
           <mat-grid-tile [colspan]="1" [rowspan]="1">
             <h1 class="amount">${{getYearBal()}}<br><span style="font-size:50%">Balance</span></h1>
           </mat-grid-tile>
           <mat-grid-tile [colspan]="1" [rowspan]="1">
-              <button mat-icon-button color="primary">
-                <mat-icon aria-label="Icon Button with a minus symbol">remove</mat-icon>
-              </button>
+              <a routerLink="/addexpense"><button mat-icon-button color="primary">
+                  <mat-icon aria-label="Icon Button with a minus symbol">remove</mat-icon>
+                </button></a>
           </mat-grid-tile>
         </mat-grid-list>
       </mat-tab>
       <mat-tab label="Month">
         <mat-grid-list cols="3" rowHeight="100px">
             <mat-grid-tile [colspan]="1" [rowspan]="1">
-                <button mat-icon-button color="primary">
-                  <mat-icon aria-label="Icon Button with a plus symbol">add</mat-icon>
-                </button>
+                <a routerLink="/addincome"><button mat-icon-button color="primary">
+                    <mat-icon aria-label="Icon Button with a plus symbol">add</mat-icon>
+                  </button></a>
             </mat-grid-tile>
             <mat-grid-tile [colspan]="1" [rowspan]="1">
               <h1 class="amount">${{getMonthBal()}}<br><span style="font-size:50%">Balance</span></h1>
             </mat-grid-tile>
             <mat-grid-tile [colspan]="1" [rowspan]="1">
-                <button mat-icon-button color="primary">
-                  <mat-icon aria-label="Icon Button with a plus symbol">remove</mat-icon>
-                </button>
+                <a routerLink="/addexpense"><button mat-icon-button color="primary">
+                  <mat-icon aria-label="Icon Button with a minus symbol">remove</mat-icon>
+                </button></a>
             </mat-grid-tile>
           </mat-grid-list>
         </mat-tab>
       <mat-tab label="Week">
         <mat-grid-list cols="3" rowHeight="100px">
             <mat-grid-tile [colspan]="1" [rowspan]="1">
-                <button mat-icon-button color="primary">
-                  <mat-icon aria-label="Icon Button with a plus symbol">add</mat-icon>
-                </button>
+                <a routerLink="/addincome"><button mat-icon-button color="primary">
+                    <mat-icon aria-label="Icon Button with a plus symbol">add</mat-icon>
+                  </button></a>
             </mat-grid-tile>
             <mat-grid-tile [colspan]="1" [rowspan]="1">
               <h1 class="amount">${{getWeekBal()}}<br><span style="font-size:50%">Balance</span></h1>
             </mat-grid-tile>
             <mat-grid-tile [colspan]="1" [rowspan]="1">
-                <button mat-icon-button color="primary">
-                  <mat-icon aria-label="Icon Button with a plus symbol">remove</mat-icon>
-                </button>
+                <a routerLink="/addexpense"><button mat-icon-button color="primary">
+                    <mat-icon aria-label="Icon Button with a minus symbol">remove</mat-icon>
+                  </button></a>
             </mat-grid-tile>
           </mat-grid-list>
       </mat-tab>
       <mat-tab label="Bi-Week">
         <mat-grid-list cols="3" rowHeight="100px">
             <mat-grid-tile [colspan]="1" [rowspan]="1">
-                <button mat-icon-button color="primary">
-                  <mat-icon aria-label="Icon Button with a plus symbol">add</mat-icon>
-                </button>
+                <a routerLink="/addincome"><button mat-icon-button color="primary">
+                    <mat-icon aria-label="Icon Button with a plus symbol">add</mat-icon>
+                  </button></a>
             </mat-grid-tile>
             <mat-grid-tile [colspan]="1" [rowspan]="1">
               <h1 class="amount">${{getBiWeekBal()}}<br><span style="font-size:50%">Balance</span></h1>
             </mat-grid-tile>
             <mat-grid-tile [colspan]="1" [rowspan]="1">
-                <button mat-icon-button color="primary">
-                  <mat-icon aria-label="Icon Button with a plus symbol">remove</mat-icon>
-                </button>
+                <a routerLink="/addexpense"><button mat-icon-button color="primary">
+                    <mat-icon aria-label="Icon Button with a minus symbol">remove</mat-icon>
+                  </button></a>
             </mat-grid-tile>
           </mat-grid-list>
       </mat-tab>
       <mat-tab label="Day">
         <mat-grid-list cols="3" rowHeight="100px">
             <mat-grid-tile [colspan]="1" [rowspan]="1">
-                <button mat-icon-button color="primary">
-                  <mat-icon aria-label="Icon Button with a plus symbol">add</mat-icon>
-                </button>
+                <a routerLink="/addincome"><button mat-icon-button color="primary">
+                    <mat-icon aria-label="Icon Button with a plus symbol">add</mat-icon>
+                  </button></a>
             </mat-grid-tile>
             <mat-grid-tile [colspan]="1" [rowspan]="1">
               <h1 class="amount">${{getDayBal()}}<br><span style="font-size:50%">Balance</span></h1>
             </mat-grid-tile>
             <mat-grid-tile [colspan]="1" [rowspan]="1">
-                <button mat-icon-button color="primary">
-                  <mat-icon aria-label="Icon Button with a plus symbol">remove</mat-icon>
-                </button>
+                <a routerLink="/addexpense"><button mat-icon-button color="primary">
+                    <mat-icon aria-label="Icon Button with a minus symbol">remove</mat-icon>
+                  </button></a>
             </mat-grid-tile>
           </mat-grid-list>
       </mat-tab>
@@ -91,15 +91,4 @@
   </mat-card-content>
 </mat-card>
 
-<div *ngIf="userOrderExpCheck()">
-  <app-expense-summary></app-expense-summary>
-  <app-income-summary></app-income-summary>
-</div>
-<div *ngIf="userOrderIncCheck()">
-  <app-income-summary></app-income-summary>  
-  <app-expense-summary></app-expense-summary>
-</div>
-
-<div *ngIf="expenseAdd">
-  <app-expense-add></app-expense-add>
-</div>
+<router-outlet></router-outlet>
