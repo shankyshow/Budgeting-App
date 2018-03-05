@@ -1,14 +1,11 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AppComponent } from '../app.component';
-import { DashboardComponent } from '../UI/dashboard/dashboard.component';
-import { LoginComponent } from '../UI/login/login.component';
-import { SignupComponent } from '../UI/signup/signup.component';
+import { ExpenseSummaryComponent } from '../UI/expense-summary/expense-summary.component';
+import { ExpenseAddComponent } from '../UI/expense-add/expense-add.component';
 
 const appRoutes: Routes = [
-  { path: 'login', component: LoginComponent },
-  { path: 'signup', component: SignupComponent },
-  { path: 'dashboard', component: DashboardComponent }
+  { path: '', component: ExpenseSummaryComponent },
+  { path: 'addexpense', component: ExpenseAddComponent }
 ];
 
 @NgModule({

@@ -1,5 +1,7 @@
 {
     "defTab":1,
+    "expSumFirst":true,
+    "incSumFirst":false,
 
     "yearBal":0,
     "monthBal":0,

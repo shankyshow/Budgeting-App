@@ -1,0 +1,66 @@
+<mat-card>
+    <mat-card-content>
+      <mat-tab-group class="tab-group" selectedIndex="{{userTab()}}">
+        <mat-tab label="Year">
+            <mat-grid-list cols="4" rowHeight="100px">
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                  <h2 style="text-align:center"><span style="font-size: 2vmax">${{getYearInc()}}</span><br><span style="font-size: 50%">Total</span></h2>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="2" [rowspan]="1" style="font-size:1.5vmax"><strong>Income Summary</strong></mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                  <h2 style="text-align:center"><span style="font-size: 2vmax">${{getYearCol()}}</span><br><span style="font-size: 50%">Collectables</span></h2>
+                </mat-grid-tile>
+            </mat-grid-list>
+            <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+        </mat-tab>
+        <mat-tab label="Month">
+            <mat-grid-list cols="4" rowHeight="100px">
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                  <h2 style="text-align:center"><span style="font-size: 2vmax">${{getMonthInc()}}</span><br><span style="font-size: 50%">Total</span></h2>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="2" [rowspan]="1" style="font-size:1.5vmax"><strong>Income Summary</strong></mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                  <h2 style="text-align:center"><span style="font-size: 2vmax">${{getMonthCol()}}</span><br><span style="font-size: 50%">Collectables</span></h2>
+                </mat-grid-tile>
+            </mat-grid-list>
+            <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+          </mat-tab>
+        <mat-tab label="Week">
+            <mat-grid-list cols="4" rowHeight="100px">
+                <mat-grid-tile [colspan]="1" [rowspan]="1">  
+                  <h2 style="text-align:center"><span style="font-size: 2vmax">${{getWeekInc()}}</span><br><span style="font-size: 50%">Total</span></h2>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="2" [rowspan]="1" style="font-size:1.5vmax"><strong>Income Summary</strong></mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                  <h2 style="text-align:center"><span style="font-size: 2vmax">${{getWeekCol()}}</span><br><span style="font-size: 50%">Collectables</span></h2>
+                </mat-grid-tile>
+            </mat-grid-list>
+            <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+        </mat-tab>
+        <mat-tab label="Bi-Week">
+            <mat-grid-list cols="4" rowHeight="100px">
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                  <h2 style="text-align:center"><span style="font-size: 2vmax">${{getBiWeekInc()}}</span><br><span style="font-size: 50%">Total</span></h2>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="2" [rowspan]="1" style="font-size:1.5vmax"><strong>Income Summary</strong></mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                  <h2 style="text-align:center"><span style="font-size: 2vmax">${{getBiWeekCol()}}</span><br><span style="font-size: 50%">Collectables</span></h2>
+                </mat-grid-tile>
+            </mat-grid-list>
+            <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+        </mat-tab>
+        <mat-tab label="Day">
+            <mat-grid-list cols="4" rowHeight="100px">
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                  <h2 style="text-align:center"><span style="font-size: 2vmax">${{getDayInc()}}</span><br><span style="font-size: 50%">Total</span></h2>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="2" [rowspan]="1" style="font-size:1.5vmax"><strong>Income Summary</strong></mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                  <h2 style="text-align:center"><span style="font-size: 2vmax">${{getDayCol()}}</span><br><span style="font-size: 50%">Collectables</span></h2>
+                </mat-grid-tile>
+            </mat-grid-list>
+            <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
+        </mat-tab>
+      </mat-tab-group>
+    </mat-card-content>
+  </mat-card>
