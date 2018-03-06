@@ -3,17 +3,10 @@
     <mat-grid-tile [colspan]="1" [rowspan]="1">
       <button mat-icon-button (click)="doGoBack();"><mat-icon aria-label="Go Back">keyboard_arrow_left</mat-icon></button>
     </mat-grid-tile>
-    <mat-grid-tile [colspan]="3" [rowspan]="1">
-      <button mat-button [matMenuTriggerFor]="menu">Select Expense Type <mat-icon aria-label="Show List">keyboard_arrow_down</mat-icon></button>
-      <mat-menu #menu="matMenu">
-          <button mat-menu-item>Item 1</button>
-          <button mat-menu-item>Item 2</button>
-          <button mat-menu-item>Add New</button>
-      </mat-menu>
-    </mat-grid-tile>
+    <mat-grid-tile [colspan]="3" [rowspan]="1">Add New Expense</mat-grid-tile>
   </mat-grid-list>
   <mat-grid-list cols="1" rowHeight="70px">
-      <mat-grid-tile [colspan]="1" [rowspan]="7">
+      <mat-grid-tile [colspan]="1" [rowspan]="9">
           <div class="loginGrid">
               <mat-form-field>
                   <input matInput [matDatepicker]="picker" placeholder="Choose a date" [formControl]="addExpDate">
@@ -21,7 +14,15 @@
                   <mat-datepicker #picker></mat-datepicker>
               </mat-form-field>
               <mat-form-field>
-                  <input matInput placeholder="Description" [(ngModel)]="addExpDesc">
+                <mat-select placeholder="Select Expense Type" [formControl]="addExpTypefc" [(ngModel)]="addExpAmount">
+                  <mat-option value="option">Type 1</mat-option>
+                  <mat-option value="option">Type 2</mat-option>
+                </mat-select>
+                <mat-error *ngIf="addExpTypefc.hasError('required')">Don't forget, this is required</mat-error>
+                <mat-hint>{{addExpTypefc.value?.sound}}</mat-hint>
+              </mat-form-field>
+              <mat-form-field>
+                  <input matInput placeholder="Description">
               </mat-form-field>
               <mat-form-field>
                   <input matInput placeholder="Amount" type="number" class="amount" [(ngModel)]="addExpAmount">
@@ -30,13 +31,21 @@
               <mat-form-field>
                   <input matInput placeholder="Shares" [(ngModel)]="addExpShares">
               </mat-form-field>
+              <mat-radio-group class="radio-group" [(ngModel)]="addExpPayType">
+                  <mat-radio-button class="radio-button" value="1" (change)="cashSelected();">Cash</mat-radio-button>
+                  <mat-radio-button class="radio-button" value="2" (change)="debitCardSelected();">Debit Card</mat-radio-button>
+                  <mat-radio-button class="radio-button" value="3" (change)="creditCardSelected();">Credit Card</mat-radio-button>
+              </mat-radio-group>
               <mat-form-field>
-                  <input matInput placeholder="Pay Method" [(ngModel)]="addExpPayMethod">
+                  <mat-select placeholder="Select Card Type" [disabled]="cardTypedisabled" [formControl]="addExpCardTypefc" [(ngModel)]="addExpCardType">
+                    <mat-option value="Cash" [disabled]="addExpPayType !== '1'">Cash</mat-option>
+                    <mat-option value="Card Type 1">Card 1</mat-option>
+                    <mat-option value="Card Type 2">Card 2</mat-option>
+                  </mat-select>
+                  <mat-error *ngIf="addExpCardTypefc.hasError('required')">Don't forget, this is required</mat-error>
+                  <mat-hint>{{addExpCardTypefc.value?.sound}}</mat-hint>
               </mat-form-field>
-              <mat-form-field>
-                  <input matInput placeholder="Card Type" [(ngModel)]="addExpCardType">
-              </mat-form-field>
-                  <button mat-raised-button (click)="submitAddNewExp();" class="emailButton">Submit</button>
+                  <button color="primary" mat-raised-button (click)="submitAddNewExp();" class="emailButton">Submit</button>
           </div>
       </mat-grid-tile>
   </mat-grid-list>

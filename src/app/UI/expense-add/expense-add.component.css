@@ -10,3 +10,13 @@ display: none;
 input.amount {
 -moz-appearance: textfield;
 }
+
+.radio-group {
+display: inline-flex;
+flex-direction: column;
+margin-bottom: 12px
+}
+
+.radio-button {
+margin: 5px;
+}

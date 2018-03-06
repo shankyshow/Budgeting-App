@@ -10,3 +10,6 @@ SignUp Sheet:
     New User Email already exists in database, Else
         New User Email Verification
     Show Registration Failed, if it did
+
+Add New Expense Screen:
+    $ and Amount need to be seperated
