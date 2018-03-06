@@ -1,0 +1,12 @@
+.amount {
+text-align: right;
+}
+
+input.amount::-webkit-outer-spin-button,
+input.amount::-webkit-inner-spin-button {
+display: none;
+}
+
+input.amount {
+-moz-appearance: textfield;
+}

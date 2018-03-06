@@ -1,1 +1,12 @@
 Ability to rearrange income summary and expense summary
+    User Selection in Account Screen
+
+Login Screen:
+    Show Login Failed if it did
+    if email & Password Mismatch, then show notification on Screen
+
+SignUp Sheet:
+    Password & Confirm Password Match | Mismatch
+    New User Email already exists in database, Else
+        New User Email Verification
+    Show Registration Failed, if it did

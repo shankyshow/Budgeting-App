@@ -1,7 +1,46 @@
-<div *ngIf="thisPage">
-  <p>expense-add works!</p>
-  <button (click)="doGoBack();">Go Back</button>
-</div>
+<mat-card *ngIf="thisPage">
+  <mat-grid-list cols="5" rowHeight="100px" class="primary">
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+      <button mat-icon-button (click)="doGoBack();"><mat-icon aria-label="Go Back">keyboard_arrow_left</mat-icon></button>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="3" [rowspan]="1">
+      <button mat-button [matMenuTriggerFor]="menu">Select Expense Type <mat-icon aria-label="Show List">keyboard_arrow_down</mat-icon></button>
+      <mat-menu #menu="matMenu">
+          <button mat-menu-item>Item 1</button>
+          <button mat-menu-item>Item 2</button>
+          <button mat-menu-item>Add New</button>
+      </mat-menu>
+    </mat-grid-tile>
+  </mat-grid-list>
+  <mat-grid-list cols="1" rowHeight="70px">
+      <mat-grid-tile [colspan]="1" [rowspan]="7">
+          <div class="loginGrid">
+              <mat-form-field>
+                  <input matInput [matDatepicker]="picker" placeholder="Choose a date" [formControl]="addExpDate">
+                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                  <mat-datepicker #picker></mat-datepicker>
+              </mat-form-field>
+              <mat-form-field>
+                  <input matInput placeholder="Description" [(ngModel)]="addExpDesc">
+              </mat-form-field>
+              <mat-form-field>
+                  <input matInput placeholder="Amount" type="number" class="amount" [(ngModel)]="addExpAmount">
+                  <span matPrefix>{{userCurrency()}}</span>
+              </mat-form-field>
+              <mat-form-field>
+                  <input matInput placeholder="Shares" [(ngModel)]="addExpShares">
+              </mat-form-field>
+              <mat-form-field>
+                  <input matInput placeholder="Pay Method" [(ngModel)]="addExpPayMethod">
+              </mat-form-field>
+              <mat-form-field>
+                  <input matInput placeholder="Card Type" [(ngModel)]="addExpCardType">
+              </mat-form-field>
+                  <button mat-raised-button (click)="submitAddNewExp();" class="emailButton">Submit</button>
+          </div>
+      </mat-grid-tile>
+  </mat-grid-list>
+</mat-card>
 <div *ngIf="!thisPage">
   <router-outlet></router-outlet>
 </div>
