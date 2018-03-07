@@ -72,7 +72,8 @@ export class AuthService {
   private oAuthLogin(provider) {
     return this.afAuth.auth.signInWithPopup(provider)
       .then((credential) => {
-        credential.user.firstName = credential.user.displayName; // look for js split
+        credential.user.firstName = credential.user.displayName.substr(0, credential.user.displayName.indexOf(' ')); // look for js split
+        credential.user.lastName = credential.user.displayName.substr(credential.user.displayName.indexOf(' ') + 1 );
         this.updateUserData(credential.user);
       });
   }

@@ -9,20 +9,20 @@
       <mat-grid-tile [colspan]="1" [rowspan]="9">
           <div class="loginGrid">
               <mat-form-field>
-                  <input matInput [matDatepicker]="picker" placeholder="Choose a date" [formControl]="addExpDate">
+                  <input matInput [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="addExpDate">
                   <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
                   <mat-datepicker #picker></mat-datepicker>
               </mat-form-field>
               <mat-form-field>
-                <mat-select placeholder="Select Expense Type" [formControl]="addExpTypefc" [(ngModel)]="addExpAmount">
-                  <mat-option value="option">Type 1</mat-option>
-                  <mat-option value="option">Type 2</mat-option>
+                <mat-select placeholder="Select Expense Type" [formControl]="addExpTypefc" [(ngModel)]="addExpType">
+                  <mat-option value="Type 1">Type 1</mat-option>
+                  <mat-option value="Type 2">Type 2</mat-option>
                 </mat-select>
                 <mat-error *ngIf="addExpTypefc.hasError('required')">Don't forget, this is required</mat-error>
                 <mat-hint>{{addExpTypefc.value?.sound}}</mat-hint>
               </mat-form-field>
               <mat-form-field>
-                  <input matInput placeholder="Description">
+                  <input matInput placeholder="Description" [(ngModel)]="addExpDesc">
               </mat-form-field>
               <mat-form-field>
                   <input matInput placeholder="Amount" type="number" class="amount" [(ngModel)]="addExpAmount">
