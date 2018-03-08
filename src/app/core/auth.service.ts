@@ -59,6 +59,11 @@ export class AuthService {
     return this.oAuthLogin(provider);
   }
 
+  fbLogin() {
+    const provider = new firebase.auth.FacebookAuthProvider();
+    return this.oAuthLogin(provider);
+  }
+
   emailLogin() {
     const provider = new firebase.auth.EmailAuthProvider();
     return this.oAuthLogin(provider);

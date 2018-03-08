@@ -1,4 +1,13 @@
-<mat-grid-list cols="1" rowHeight="70px">
+<mat-card class="mainCard">
+    <mat-grid-list cols="5" rowHeight="100px" class="primary">
+        <mat-grid-tile [colspan]="1" [rowspan]="1"></mat-grid-tile>
+        <mat-grid-tile [colspan]="3" [rowspan]="1">
+            <mat-card-header class="loginHeader">{{ title }}</mat-card-header>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="1" [rowspan]="1"></mat-grid-tile>
+    </mat-grid-list>
+</mat-card>
+<mat-grid-list cols="1" rowHeight="70px" *ngIf="thisPage">
     <mat-grid-tile [colspan]="1" [rowspan]="6">
         <div class="loginGrid">
             <mat-form-field>
@@ -9,11 +18,12 @@
             </mat-form-field>
             <mat-form-field>
                 <input matInput placeholder="Enter your email" [formControl]="email" required [(ngModel)]="emailModel">
-                <mat-error *ngIf="email.invalid">{{getErrorMessage()}}</mat-error>
+                <mat-error *ngIf="email.invalid">{{getEmailErrorMessage()}}</mat-error>
             </mat-form-field>
             <mat-form-field>
-                <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'" [(ngModel)]="passwordModel">
+                <input matInput placeholder="Enter your password" [formControl]="password" [type]="hide ? 'password' : 'text'" [(ngModel)]="passwordModel">
                 <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
+                <mat-error *ngIf="password.invalid && password.touched">{{getPasswordErrorMessage()}}</mat-error>
             </mat-form-field>
             <mat-form-field>
                 <input matInput placeholder="Confirm your password" [type]="hide ? 'password' : 'text'" [(ngModel)]="confirmpasswordModel">
@@ -22,4 +32,15 @@
                 <button mat-raised-button color="primary" (click)="emailSignUp();" class="emailButton">Register</button>
         </div>
     </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <div class="separator-line"></div>
+        <div class="separator-text">Already a Member?</div>
+        <div class="separator-line"></div>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <button mat-raised-button color="accent" (click)="doGoBack()">Login</button>
+    </mat-grid-tile>
 </mat-grid-list>
+<div *ngIf="!thisPage">
+    <router-outlet></router-outlet>
+</div>

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
 import { AuthService } from '../../core/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -13,15 +14,12 @@ export class LoginComponent implements OnInit {
   email = new FormControl('', [Validators.required, Validators.email]);
   hide = true;
 
-  constructor(public auth: AuthService) {
+  constructor(public auth: AuthService, public router: Router) {
   }
 
   ngOnInit() {
   }
 
-  showSignup() {
-    document.getElementById('signup_hidden').style.display = 'inline';
-  }
   googleLogin() {
     this.auth.googleLogin();
   }
@@ -40,6 +38,10 @@ export class LoginComponent implements OnInit {
     return this.email.hasError('required') ? 'You must enter a value' :
         this.email.hasError('email') ? 'Not a valid email' :
             '';
+  }
+
+  showSignup() {
+    this.router.navigateByUrl('/signup');
   }
 
 }

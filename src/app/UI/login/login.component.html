@@ -25,11 +25,14 @@
     <mat-grid-tile [colspan]="1" [rowspan]="1">
         <button mat-raised-button color="primary" (click)="emailLogin();">Login</button>
     </mat-grid-tile>
+</mat-grid-list>
+<mat-grid-list cols="1" rowHeight="70px" id="signup_hidden">
     <mat-grid-tile [colspan]="1" [rowspan]="1">
-        <div class="separator-line"></div><div class="separator-text">New to this?</div><div class="separator-line"></div>
+        <div class="separator-line"></div>
+        <div class="separator-text">New to this?</div>
+        <div class="separator-line"></div>
     </mat-grid-tile>
     <mat-grid-tile [colspan]="1" [rowspan]="1">
         <button mat-raised-button color="accent" (click)="showSignup();">Sign Up</button>
     </mat-grid-tile>
 </mat-grid-list>
-<div id="signup_hidden"><app-signup></app-signup></div>

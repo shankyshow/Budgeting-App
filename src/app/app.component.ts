@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
 import { AuthService } from './core/auth.service';
 import { NotifyService } from './core/notify.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-root',
@@ -11,10 +12,8 @@ import { NotifyService } from './core/notify.service';
 export class AppComponent {
   title = 'Shanky`s App for Budgeting & Personal Finance';
 
-  email = new FormControl('', [Validators.required, Validators.email]);
-  hide = true;
-
-  constructor(public auth: AuthService, public notify: NotifyService) {
+  constructor(public auth: AuthService, public notify: NotifyService, public router: Router) {
+    router.navigateByUrl('/login');
   }
 
   logout() {

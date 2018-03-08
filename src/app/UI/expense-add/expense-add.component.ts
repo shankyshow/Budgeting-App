@@ -68,7 +68,7 @@ export class ExpenseAddComponent implements OnInit {
 
   doGoBack() {
     this.thisPage = false;
-    this.router.navigateByUrl('');
+    this.router.navigateByUrl('/dashboard');
   }
 
   ngOnInit() {

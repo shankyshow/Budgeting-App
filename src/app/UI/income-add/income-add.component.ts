@@ -14,7 +14,7 @@ export class IncomeAddComponent implements OnInit {
 
   doGoBack() {
     this.thisPage = false;
-    this.router.navigateByUrl('');
+    this.router.navigateByUrl('/dashboard');
   }
 
   ngOnInit() {

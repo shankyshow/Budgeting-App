@@ -1,33 +1,7 @@
-<mat-card *ngIf="auth.user | async as user; else showLogin">
-    <mat-grid-list cols="5" rowHeight="100px" class="primary">
-        <mat-grid-tile [colspan]="1" [rowspan]="1">
-            <button mat-icon-button [matMenuTriggerFor]="menu">
-                <mat-icon>menu</mat-icon>
-            </button>
-            <mat-menu #menu="matMenu">
-                <button mat-menu-item>
-                    <mat-icon>money_off</mat-icon>
-                    <span>Expense Log</span>
-                </button>
-                <button mat-menu-item>
-                    <mat-icon>attach_money</mat-icon>
-                    <span>Income  Log</span>
-                </button>
-                <button mat-menu-item>
-                        <mat-icon>account_circle</mat-icon>
-                        <span>Account</span>
-                </button>
-            </mat-menu>
-        </mat-grid-tile>
-        <mat-grid-tile [colspan]="3" [rowspan]="1">
-            <mat-card-header class="loginHeader">{{ user.displayName }}</mat-card-header>
-        </mat-grid-tile>
-        <mat-grid-tile [colspan]="1" [rowspan]="1">
-            <button mat-icon-button><mat-icon aria-label="Logout Button" (click)="logout();">power_settings_new</mat-icon></button>
-        </mat-grid-tile>
-    </mat-grid-list>
+<ng-container *ngIf="auth.user | async as user; else showLogin">
     <app-dashboard></app-dashboard>
-</mat-card>
+</ng-container>
+
 <ng-template #showLogin>
-    <app-login></app-login>
+    <router-outlet></router-outlet>
 </ng-template>

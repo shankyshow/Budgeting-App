@@ -1,5 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import * as dashboard from '../../../ud/dashboard.json';
+import { AuthService } from '../../core/auth.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,9 +16,10 @@ export class DashboardComponent implements OnInit {
   // tslint:disable-next-line:member-ordering
   expenseAdd = false;
 
-  constructor() { }
+  constructor(public auth: AuthService, private router: Router) { }
 
   ngOnInit() {
+    this.router.navigateByUrl('/dashboard');
   }
 
 /* MAIN BALANCE Summary */
@@ -38,6 +41,10 @@ export class DashboardComponent implements OnInit {
 
   getDayBal(): number {
     return (<any>dashboard).dayBal;
+  }
+
+  logout() {
+    this.auth.signOut();
   }
 
 }

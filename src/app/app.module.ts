@@ -10,14 +10,14 @@ import { AngularFireModule } from 'angularfire2';
 
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import { DashboardComponent } from './UI/dashboard/dashboard.component';
-import { LoginComponent } from './UI/login/login.component';
-import { SignupComponent } from './UI/signup/signup.component';
-import { IncomeSummaryComponent } from './UI/income-summary/income-summary.component';
-import { ExpenseSummaryComponent } from './UI/expense-summary/expense-summary.component';
-import { ExpenseAddComponent } from './UI/expense-add/expense-add.component';
-import { IncomeAddComponent } from './UI/income-add/income-add.component';
-import { DashboardSummaryComponent } from './UI/dashboard-summary/dashboard-summary.component';
+import { DashboardComponent } from './ui/dashboard/dashboard.component';
+import { LoginComponent } from './ui/login/login.component';
+import { SignupComponent } from './ui/signup/signup.component';
+import { IncomeSummaryComponent } from './ui/income-summary/income-summary.component';
+import { ExpenseSummaryComponent } from './ui/expense-summary/expense-summary.component';
+import { ExpenseAddComponent } from './ui/expense-add/expense-add.component';
+import { IncomeAddComponent } from './ui/income-add/income-add.component';
+import { DashboardSummaryComponent } from './ui/dashboard-summary/dashboard-summary.component';
 
 @NgModule({
   declarations: [
