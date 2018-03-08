@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import * as dashboard from '../../../UD/dashboard.json';
+import * as dashboard from '../../../ud/dashboard.json';
 
 @Component({
   selector: 'app-expense-summary',

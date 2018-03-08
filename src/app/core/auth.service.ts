@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
+import { NotifyService } from './notify.service';
 
 import * as firebase from 'firebase/app';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -8,6 +9,7 @@ import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firesto
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
 
+
 interface User {
   uid: string;
   email: string;
@@ -15,6 +17,9 @@ interface User {
   displayName?: string;
   firstName?: string;
   lastName?: string;
+  defaultTab?: number;
+  expenseSummaryFirst?: boolean;
+  incomeSummaryFirst?: boolean;
 }
 
 
@@ -25,7 +30,8 @@ export class AuthService {
 
   constructor(private afAuth: AngularFireAuth,
               private afs: AngularFirestore,
-              private router: Router) {
+              private router: Router,
+              private notify: NotifyService) {
 
       //// Get auth data, then get firestore user document || null
       this.user = this.afAuth.authState
@@ -41,21 +47,15 @@ export class AuthService {
   emailSignUp(firstName: string, lastName: string, email: string, password: string) {
     return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
       .then(user => {
-        // this.updateUserData(user);
-        console.log(user);
         user.firstName = firstName;
         user.lastName = lastName;
         return this.setUserDoc(user); // create initial user document
-      });
+      })
+      .catch(error => this.handleError(error) );
   }
 
   googleLogin() {
     const provider = new firebase.auth.GoogleAuthProvider();
-    return this.oAuthLogin(provider);
-  }
-
-  fbLogin() {
-    const provider = new firebase.auth.FacebookAuthProvider();
     return this.oAuthLogin(provider);
   }
 
@@ -79,9 +79,7 @@ export class AuthService {
   }
 
   private setUserDoc(user) {
-
     const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
-
     const data: User = {
       uid: user.uid,
       email: user.email || null,
@@ -114,5 +112,11 @@ export class AuthService {
     this.afAuth.auth.signOut().then(() => {
         this.router.navigate(['/']);
     });
+  }
+
+  // If error, console log and notify user
+  private handleError(error) {
+    console.error(error);
+    this.notify.update(error.message, 'error');
   }
 }

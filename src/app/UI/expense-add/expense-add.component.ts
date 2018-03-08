@@ -2,7 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, Validators } from '@angular/forms';
 import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
-import * as dashboard from '../../../UD/dashboard.json';
+import * as dashboard from '../../../ud/dashboard.json';
 import { Observable } from '@firebase/util';
 
 interface Expense {

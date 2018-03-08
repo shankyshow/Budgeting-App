@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import {FormControl, Validators} from '@angular/forms';
 import { AuthService } from './core/auth.service';
+import { NotifyService } from './core/notify.service';
 
 @Component({
   selector: 'app-root',
@@ -13,7 +14,7 @@ export class AppComponent {
   email = new FormControl('', [Validators.required, Validators.email]);
   hide = true;
 
-  constructor(public auth: AuthService) {
+  constructor(public auth: AuthService, public notify: NotifyService) {
   }
 
   logout() {
