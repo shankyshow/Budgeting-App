@@ -7,33 +7,43 @@
         <mat-grid-tile [colspan]="1" [rowspan]="1"></mat-grid-tile>
     </mat-grid-list>
 </mat-card>
-<mat-grid-list cols="1" rowHeight="70px" *ngIf="thisPage">
-    <mat-grid-tile [colspan]="1" [rowspan]="6">
+<mat-grid-list cols="1" rowHeight="50px" *ngIf="thisPage">
+    <mat-grid-tile [colspan]="1" [rowspan]="2">
+        <div class="separator-line"></div>
+        <div class="separator-text">Nothing too difficult<br>Just some basic details</div>
+        <div class="separator-line"></div>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="9">
         <div class="loginGrid">
-            <mat-form-field>
+            <mat-form-field class="formFields">
                 <input matInput placeholder="First Name" [(ngModel)]="firstName">
             </mat-form-field>
-            <mat-form-field>
+            <mat-form-field class="formFields">
                 <input matInput placeholder="Last Name" [(ngModel)]="lastName">
             </mat-form-field>
-            <mat-form-field>
+            <mat-form-field class="formFields">
                 <input matInput placeholder="Enter your email" [formControl]="email" required [(ngModel)]="emailModel">
                 <mat-error *ngIf="email.invalid">{{getEmailErrorMessage()}}</mat-error>
             </mat-form-field>
-            <mat-form-field>
+            <mat-form-field class="formFields">
                 <input matInput placeholder="Enter your password" [formControl]="password" [type]="hide ? 'password' : 'text'" [(ngModel)]="passwordModel">
                 <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
                 <mat-error *ngIf="password.invalid && password.touched">{{getPasswordErrorMessage()}}</mat-error>
             </mat-form-field>
-            <mat-form-field>
+            <mat-form-field class="formFields">
                 <input matInput placeholder="Confirm your password" [type]="hide ? 'password' : 'text'" [(ngModel)]="confirmpasswordModel">
                 <mat-icon matSuffix (click)="hide = !hide">{{hide ? 'visibility' : 'visibility_off'}}</mat-icon>
-            </mat-form-field>
-            <button mat-raised-button color="primary" (click)="emailSignUp()" class="emailButton" [disabled]=
-                "!firstName || !lastName || !email.valid || !password.valid || !confirmpasswordModel">
-                Register
-            </button>
+            </mat-form-field >
         </div>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <button mat-raised-button color="primary" (click)="emailSignUp()" class="emailButton" [disabled]=
+            "!firstName || !lastName || !email.valid || !password.valid || !confirmpasswordModel || confirmpasswordModel != passwordModel">
+            Register
+        </button>
+    </mat-grid-tile>
+    <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <mat-error *ngIf="confirmpasswordModel != passwordModel" class="separator-text">Your passwords do not match, please check again</mat-error>
     </mat-grid-tile>
     <mat-grid-tile [colspan]="1" [rowspan]="1">
         <div class="separator-line"></div>
