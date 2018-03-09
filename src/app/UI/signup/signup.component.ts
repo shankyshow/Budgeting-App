@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../../core/auth.service';
+import { NewUserInterface } from '../../core/ud/type-interface';
 import * as firebase from 'firebase/app';
 
 import {FormControl, Validators} from '@angular/forms';
@@ -30,8 +31,7 @@ export class SignupComponent implements OnInit {
   constructor(public auth: AuthService, public router: Router) {
   }
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   doGoBack() {
     this.thisPage = false;
@@ -39,7 +39,13 @@ export class SignupComponent implements OnInit {
   }
 
   emailSignUp() {
-    this.auth.emailSignUp(this.firstName, this.lastName, this.emailModel, this.passwordModel).catch(() => {
+    const newUser: NewUserInterface = {
+      firstName: this.firstName,
+      lastName: this.lastName,
+      email: this.emailModel,
+      password: this.passwordModel
+    };
+    this.auth.emailSignUp(newUser).catch(() => {
       // In case registration Fails
       console.log('Registration Failed');
       this.firstName = '';

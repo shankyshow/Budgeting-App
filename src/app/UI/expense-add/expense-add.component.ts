@@ -1,21 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, Validators } from '@angular/forms';
-import { AngularFirestore, AngularFirestoreCollection } from 'angularfire2/firestore';
 import * as dashboard from '../../../ud/dashboard.json';
-import { Observable } from '@firebase/util';
-
-interface Expense {
-  id: string;
-  uid: string;
-  date: string;
-  expenseType: string;
-  description: string;
-  amount: number;
-  shares: number;
-  payType: string;
-  cardType: string;
-}
+import { AddExpenseInterface } from '../../core/ud/type-interface';
+import { ExpenseService } from '../../core/ud/expense.service';
 
 @Component({
   selector: 'app-expense-add',
@@ -26,23 +14,23 @@ export class ExpenseAddComponent implements OnInit {
 
   thisPage = true;
 
+  expenseTotal = 0;
+
   addExpDate: string;
   addExpType: string;
   addExpDesc: string;
+  addExpDatefc = new FormControl(new Date());
   addExpAmount: number;
-  addExpShares: number;
+  addExpShares = 0;
   addExpPayType: string;
   addExpCardType: string;
 
-  addExpDatefc = new FormControl(new Date());
 
   cardTypedisabled = false;
 
   addExpTypefc = new FormControl('', [Validators.required]); // formControl for ExpenseType in the form
   addExpCardTypefc = new FormControl('', [Validators.required]); // formControl for CardType in the form
-
-  expenseCollection: AngularFirestoreCollection<Expense>;
-  expense: Observable<Expense[]>;
+  addExpAmountfc = new FormControl('', [Validators.required]); // formControl for Amount in the form
 
   cashSelected() {
     this.addExpCardType = 'Cash';
@@ -62,9 +50,7 @@ export class ExpenseAddComponent implements OnInit {
     return (<any>dashboard).selectedCurrency;
   }
 
-  constructor(private router: Router, private afs: AngularFirestore) {
-    this.expenseCollection = this.afs.collection<Expense>('expenses');
-  }
+  constructor(private router: Router, public exp: ExpenseService) {}
 
   doGoBack() {
     this.thisPage = false;
@@ -76,10 +62,7 @@ export class ExpenseAddComponent implements OnInit {
 
   submitAddNewExp(data) {
     this.thisPage = true;
-    const autoid = this.afs.createId();
-    const expData: Expense = {
-      id: autoid,
-      uid: 'userid',
+    const newExpense: AddExpenseInterface = {
       date: this.addExpDate,
       expenseType: this.addExpType,
       description: this.addExpDesc,
@@ -88,7 +71,7 @@ export class ExpenseAddComponent implements OnInit {
       payType: this.addExpPayType,
       cardType: this.addExpCardType
     };
-    this.expenseCollection.add(expData);
+    this.exp.addExpense(newExpense);
   }
 
 }

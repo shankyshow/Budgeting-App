@@ -3,6 +3,7 @@ import {FormControl, Validators} from '@angular/forms';
 import { AuthService } from './core/auth.service';
 import { NotifyService } from './core/notify.service';
 import { Router } from '@angular/router';
+import { ExpenseService } from './core/ud/expense.service';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,12 @@ import { Router } from '@angular/router';
 export class AppComponent {
   title = 'Shanky`s App for Budgeting & Personal Finance';
 
-  constructor(public auth: AuthService, public notify: NotifyService, public router: Router) {
+  constructor(
+    public auth: AuthService,
+    public notify: NotifyService,
+    public router: Router,
+    public exp: ExpenseService
+  ) {
     router.navigateByUrl('/login');
   }
 

@@ -44,11 +44,11 @@ export class AuthService {
         });
   }
 
-  emailSignUp(firstName: string, lastName: string, email: string, password: string) {
-    return this.afAuth.auth.createUserWithEmailAndPassword(email, password)
+  emailSignUp(data) {
+    return this.afAuth.auth.createUserWithEmailAndPassword(data.email, data.password)
       .then(user => {
-        user.firstName = firstName;
-        user.lastName = lastName;
+        user.firstName = data.firstName;
+        user.lastName = data.lastName;
         return this.setUserDoc(user); // create initial user document
       })
       .catch(error => this.handleError(error) );
@@ -64,9 +64,8 @@ export class AuthService {
     return this.oAuthLogin(provider);
   }
 
-  emailLogin() {
-    const provider = new firebase.auth.EmailAuthProvider();
-    return this.oAuthLogin(provider);
+  emailLogin(email: string, password: string) {
+    return this.afAuth.auth.signInWithEmailAndPassword(email, password);
   }
 
   // Update properties on the user document

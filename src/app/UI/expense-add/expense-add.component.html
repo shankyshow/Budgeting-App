@@ -1,55 +1,68 @@
-<mat-card *ngIf="thisPage">
-  <mat-grid-list cols="5" rowHeight="100px" class="primary">
-    <mat-grid-tile [colspan]="1" [rowspan]="1">
-      <button mat-icon-button (click)="doGoBack();"><mat-icon aria-label="Go Back">keyboard_arrow_left</mat-icon></button>
-    </mat-grid-tile>
-    <mat-grid-tile [colspan]="3" [rowspan]="1">Add New Expense</mat-grid-tile>
-  </mat-grid-list>
-  <mat-grid-list cols="1" rowHeight="70px">
-      <mat-grid-tile [colspan]="1" [rowspan]="9">
-          <div class="loginGrid">
-              <mat-form-field>
-                  <input matInput [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="addExpDate">
-                  <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
-                  <mat-datepicker #picker></mat-datepicker>
-              </mat-form-field>
-              <mat-form-field>
-                <mat-select placeholder="Select Expense Type" [formControl]="addExpTypefc" [(ngModel)]="addExpType">
-                  <mat-option value="Type 1">Type 1</mat-option>
-                  <mat-option value="Type 2">Type 2</mat-option>
-                </mat-select>
-                <mat-error *ngIf="addExpTypefc.hasError('required')">Don't forget, this is required</mat-error>
-                <mat-hint>{{addExpTypefc.value?.sound}}</mat-hint>
-              </mat-form-field>
-              <mat-form-field>
-                  <input matInput placeholder="Description" [(ngModel)]="addExpDesc">
-              </mat-form-field>
-              <mat-form-field>
-                  <input matInput placeholder="Amount" type="number" class="amount" [(ngModel)]="addExpAmount">
-                  <span matPrefix>{{userCurrency()}}</span>
-              </mat-form-field>
-              <mat-form-field>
-                  <input matInput placeholder="Shares" [(ngModel)]="addExpShares">
-              </mat-form-field>
-              <mat-radio-group class="radio-group" [(ngModel)]="addExpPayType">
-                  <mat-radio-button class="radio-button" value="1" (change)="cashSelected();">Cash</mat-radio-button>
-                  <mat-radio-button class="radio-button" value="2" (change)="debitCardSelected();">Debit Card</mat-radio-button>
-                  <mat-radio-button class="radio-button" value="3" (change)="creditCardSelected();">Credit Card</mat-radio-button>
-              </mat-radio-group>
-              <mat-form-field>
-                  <mat-select placeholder="Select Card Type" [disabled]="cardTypedisabled" [formControl]="addExpCardTypefc" [(ngModel)]="addExpCardType">
-                    <mat-option value="Cash" [disabled]="addExpPayType !== '1'">Cash</mat-option>
-                    <mat-option value="Card Type 1">Card 1</mat-option>
-                    <mat-option value="Card Type 2">Card 2</mat-option>
-                  </mat-select>
-                  <mat-error *ngIf="addExpCardTypefc.hasError('required')">Don't forget, this is required</mat-error>
-                  <mat-hint>{{addExpCardTypefc.value?.sound}}</mat-hint>
-              </mat-form-field>
-                  <button color="primary" mat-raised-button (click)="submitAddNewExp();" class="emailButton">Submit</button>
-          </div>
-      </mat-grid-tile>
-  </mat-grid-list>
+<div *ngIf="thisPage">
+    <mat-card class="primary">
+    <mat-grid-list cols="5" rowHeight="100px">
+        <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <button mat-icon-button (click)="doGoBack();">
+                <mat-icon aria-label="Go Back">keyboard_arrow_left</mat-icon>
+            </button>
+        </mat-grid-tile>
+        <mat-grid-tile [colspan]="3" [rowspan]="1">$ {{ expenseTotal }}</mat-grid-tile>
+    </mat-grid-list>
 </mat-card>
+    <mat-grid-list cols="1" rowHeight="80px">
+        <mat-grid-tile [colspan]="1" [rowspan]="8">
+            <div class="loginGrid">
+                <mat-form-field class="formFields">
+                    <input matInput [matDatepicker]="picker" placeholder="Choose a date" [(ngModel)]="addExpDate">
+                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                    <mat-datepicker #picker></mat-datepicker>
+                </mat-form-field>
+                <mat-form-field class="formFields">
+                    <mat-select placeholder="Select Expense Type" [formControl]="addExpTypefc" [(ngModel)]="addExpType">
+                        <mat-option value="Type 1">Type 1</mat-option>
+                        <mat-option value="Type 2">Type 2</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="addExpTypefc.hasError('required')">Don't forget, this is required</mat-error>
+                    <mat-hint>{{addExpTypefc.value?.sound}}</mat-hint>
+                </mat-form-field>
+                <mat-form-field class="formFields">
+                    <input matInput placeholder="Description" [(ngModel)]="addExpDesc">
+                </mat-form-field>
+                <mat-form-field class="formFields">
+                    <input matInput placeholder="Amount" type="number" [formControl]="addExpAmountfc" class="amount" [(ngModel)]="addExpAmount">
+                    <span matPrefix>{{userCurrency()}}</span>
+                    <mat-error *ngIf="addExpAmountfc.hasError('required')">Amount cannot be empty!</mat-error>
+                    <mat-hint>{{addExpAmountfc.value?.sound}}</mat-hint>
+                </mat-form-field>
+                <mat-form-field hintLabel="Additional, excluding youself" class="formFields">
+                    <input matInput placeholder="Shares" type="number" [(ngModel)]="addExpShares">
+                </mat-form-field>
+                <mat-radio-group class="radio-group" [(ngModel)]="addExpPayType">
+                    <mat-radio-button class="radio-button" value="1" (change)="cashSelected();">Cash</mat-radio-button>
+                    <mat-radio-button class="radio-button" value="2" (change)="debitCardSelected();">Debit Card</mat-radio-button>
+                    <mat-radio-button class="radio-button" value="3" (change)="creditCardSelected();">Credit Card</mat-radio-button>
+                </mat-radio-group>
+                <mat-form-field class="formFields">
+                    <mat-select placeholder="Select Card Type" [disabled]="cardTypedisabled" [formControl]="addExpCardTypefc" [(ngModel)]="addExpCardType">
+                        <mat-option value="Cash" [disabled]="addExpPayType !== '1'">Cash</mat-option>
+                        <mat-option value="Card Type 1">Card 1</mat-option>
+                        <mat-option value="Card Type 2">Card 2</mat-option>
+                    </mat-select>
+                    <mat-error *ngIf="addExpCardTypefc.hasError('required')">Don't forget, this is required</mat-error>
+                    <mat-hint>{{addExpCardTypefc.value?.sound}}</mat-hint>
+                </mat-form-field>
+                <button color="primary" mat-raised-button (click)="submitAddNewExp();" class="emailButton" [disabled]="
+                !addExpDate ||
+                !addExpType ||
+                !addExpDesc ||
+                !addExpAmount ||
+                !addExpPayType ||
+                !addExpCardType
+                ">Submit</button>
+            </div>
+        </mat-grid-tile>
+    </mat-grid-list>
+</div>
 <div *ngIf="!thisPage">
-  <router-outlet></router-outlet>
+    <router-outlet></router-outlet>
 </div>

@@ -4,12 +4,13 @@ import { AuthService } from './auth.service';
 import { AngularFireAuthModule } from 'angularfire2/auth';
 import { AngularFirestoreModule } from 'angularfire2/firestore';
 import { NotifyService } from './notify.service';
+import { ExpenseService } from './ud/expense.service';
 
 @NgModule({
   imports: [
     AngularFireAuthModule,
-    AngularFirestoreModule
+    AngularFirestoreModule.enablePersistence()
   ],
-  providers: [AuthService, NotifyService]
+  providers: [AuthService, NotifyService, ExpenseService]
 })
 export class CoreModule { }

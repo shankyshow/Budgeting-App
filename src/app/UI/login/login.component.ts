@@ -14,6 +14,10 @@ export class LoginComponent implements OnInit {
   email = new FormControl('', [Validators.required, Validators.email]);
   hide = true;
 
+  uemail: string;
+  upassword: string;
+  loginStatus: string;
+
   constructor(public auth: AuthService, public router: Router) {
   }
 
@@ -27,7 +31,14 @@ export class LoginComponent implements OnInit {
     this.auth.fbLogin();
   }
   emailLogin() {
-    this.auth.emailLogin();
+    this.loginStatus = 'Login failed, please check your input';
+    this.auth.emailLogin(this.uemail, this.upassword).catch(() => {
+      // In case login Fails
+      console.log('Login Failed');
+      this.uemail = '';
+      this.upassword = '';
+      this.loginStatus = 'Login failed, please check your input';
+    });
   }
 
   logout() {
