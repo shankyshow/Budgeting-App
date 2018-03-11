@@ -1,66 +1,101 @@
-<mat-card>
-    <mat-card-content>
-      <mat-tab-group class="tab-group" headerPosition="below" selectedIndex="{{userTab()}}">
-        <mat-tab label="Year">
-            <mat-grid-list cols="4" rowHeight="100px">
-                <mat-grid-tile [colspan]="1" [rowspan]="1">
-                  <h2 style="text-align:center"><span style="font-size: 2vmax">${{getYearExp()}}</span><br><span style="font-size: 50%">Total</span></h2>
-                </mat-grid-tile>
-                <mat-grid-tile [colspan]="2" [rowspan]="1" style="font-size:1.5vmax"><strong>Expense Summary</strong></mat-grid-tile>
-                <mat-grid-tile [colspan]="1" [rowspan]="1">
-                  <h2 style="text-align:center"><span style="font-size: 2vmax">${{getYearStat()}}</span><br><span style="font-size: 50%">Over/Under</span></h2>
-                </mat-grid-tile>
-            </mat-grid-list>
-            <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-        </mat-tab>
-        <mat-tab label="Month">
-            <mat-grid-list cols="4" rowHeight="100px">
-                <mat-grid-tile [colspan]="1" [rowspan]="1">
-                  <h2 style="text-align:center"><span style="font-size: 2vmax">${{getMonthExp()}}</span><br><span style="font-size: 50%">Total</span></h2>
-                </mat-grid-tile>
-                <mat-grid-tile [colspan]="2" [rowspan]="1" style="font-size:1.5vmax"><strong>Expense Summary</strong></mat-grid-tile>
-                <mat-grid-tile [colspan]="1" [rowspan]="1">
-                  <h2 style="text-align:center"><span style="font-size: 2vmax">${{getMonthStat()}}</span><br><span style="font-size: 50%">Over/Under</span></h2>
-                </mat-grid-tile>
-            </mat-grid-list>
-            <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-          </mat-tab>
-        <mat-tab label="Week">
-            <mat-grid-list cols="4" rowHeight="100px">
-                <mat-grid-tile [colspan]="1" [rowspan]="1">  
-                  <h2 style="text-align:center"><span style="font-size: 2vmax">${{getWeekExp()}}</span><br><span style="font-size: 50%">Total</span></h2>
-                </mat-grid-tile>
-                <mat-grid-tile [colspan]="2" [rowspan]="1" style="font-size:1.5vmax"><strong>Expense Summary</strong></mat-grid-tile>
-                <mat-grid-tile [colspan]="1" [rowspan]="1">
-                  <h2 style="text-align:center"><span style="font-size: 2vmax">${{getWeekStat()}}</span><br><span style="font-size: 50%">Over/Under</span></h2>
-                </mat-grid-tile>
-            </mat-grid-list>
-            <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-        </mat-tab>
-        <mat-tab label="Bi-Week">
-            <mat-grid-list cols="4" rowHeight="100px">
-                <mat-grid-tile [colspan]="1" [rowspan]="1">
-                  <h2 style="text-align:center"><span style="font-size: 2vmax">${{getBiWeekExp()}}</span><br><span style="font-size: 50%">Total</span></h2>
-                </mat-grid-tile>
-                <mat-grid-tile [colspan]="2" [rowspan]="1" style="font-size:1.5vmax"><strong>Expense Summary</strong></mat-grid-tile>
-                <mat-grid-tile [colspan]="1" [rowspan]="1">
-                  <h2 style="text-align:center"><span style="font-size: 2vmax">${{getBiWeekStat()}}</span><br><span style="font-size: 50%">Over/Under</span></h2>
-                </mat-grid-tile>
-            </mat-grid-list>
-            <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-        </mat-tab>
-        <mat-tab label="Day">
-            <mat-grid-list cols="4" rowHeight="100px">
-                <mat-grid-tile [colspan]="1" [rowspan]="1">
-                  <h2 style="text-align:center"><span style="font-size: 2vmax">${{getDayExp()}}</span><br><span style="font-size: 50%">Total</span></h2>
-                </mat-grid-tile>
-                <mat-grid-tile [colspan]="2" [rowspan]="1" style="font-size:1.5vmax"><strong>Expense Summary</strong></mat-grid-tile>
-                <mat-grid-tile [colspan]="1" [rowspan]="1">
-                  <h2 style="text-align:center"><span style="font-size: 2vmax">${{getDayStat()}}</span><br><span style="font-size: 50%">Over/Under</span></h2>
-                </mat-grid-tile>
-            </mat-grid-list>
-            <img mat-card-image src="https://material.angular.io/assets/img/examples/shiba2.jpg" alt="Photo of a Shiba Inu">
-        </mat-tab>
-      </mat-tab-group>
-    </mat-card-content>
+<ng-container *ngIf="auth.user | async as user">
+  <mat-card class="summary-cards">
+    <mat-tab-group headerPosition="below" selectedIndex="{{user.defTab}}">
+      <mat-tab label="Year">
+        <mat-grid-list cols="4" rowHeight="100px">
+          <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <h2 style="text-align:center">
+              <span style="font-size: 2vmax">{{user.currency}} {{getYearExp()}}</span>
+              <br>
+              <span style="font-size: 50%">Total</span>
+            </h2>
+          </mat-grid-tile>
+          <mat-grid-tile [colspan]="2" [rowspan]="1" style="font-size:1.5vmax">Expense Summary</mat-grid-tile>
+          <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <h2 style="text-align:center">
+              <span style="font-size: 2vmax">{{user.currency}} {{getYearStat()}}</span>
+              <br>
+              <span style="font-size: 50%">Over/Under</span>
+            </h2>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </mat-tab>
+      <mat-tab label="Month">
+        <mat-grid-list cols="4" rowHeight="100px">
+          <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <h2 style="text-align:center">
+              <span style="font-size: 2vmax">{{user.currency}} {{getMonthExp()}}</span>
+              <br>
+              <span style="font-size: 50%">Total</span>
+            </h2>
+          </mat-grid-tile>
+          <mat-grid-tile [colspan]="2" [rowspan]="1" style="font-size:1.5vmax">Expense Summary</mat-grid-tile>
+          <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <h2 style="text-align:center">
+              <span style="font-size: 2vmax">{{user.currency}} {{getMonthStat()}}</span>
+              <br>
+              <span style="font-size: 50%">Over/Under</span>
+            </h2>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </mat-tab>
+      <mat-tab label="Week">
+        <mat-grid-list cols="4" rowHeight="100px">
+          <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <h2 style="text-align:center">
+              <span style="font-size: 2vmax">{{user.currency}} {{getWeekExp()}}</span>
+              <br>
+              <span style="font-size: 50%">Total</span>
+            </h2>
+          </mat-grid-tile>
+          <mat-grid-tile [colspan]="2" [rowspan]="1" style="font-size:1.5vmax">Expense Summary</mat-grid-tile>
+          <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <h2 style="text-align:center">
+              <span style="font-size: 2vmax">{{user.currency}} {{getWeekStat()}}</span>
+              <br>
+              <span style="font-size: 50%">Over/Under</span>
+            </h2>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </mat-tab>
+      <mat-tab label="Bi-Week">
+        <mat-grid-list cols="4" rowHeight="100px">
+          <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <h2 style="text-align:center">
+              <span style="font-size: 2vmax">{{user.currency}} {{getBiWeekExp()}}</span>
+              <br>
+              <span style="font-size: 50%">Total</span>
+            </h2>
+          </mat-grid-tile>
+          <mat-grid-tile [colspan]="2" [rowspan]="1" style="font-size:1.5vmax">Expense Summary</mat-grid-tile>
+          <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <h2 style="text-align:center">
+              <span style="font-size: 2vmax">{{user.currency}} {{getBiWeekStat()}}</span>
+              <br>
+              <span style="font-size: 50%">Over/Under</span>
+            </h2>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </mat-tab>
+      <mat-tab label="Day">
+        <mat-grid-list cols="4" rowHeight="100px">
+          <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <h2 style="text-align:center">
+              <span style="font-size: 2vmax">{{user.currency}} {{getDayExp()}}</span>
+              <br>
+              <span style="font-size: 50%">Total</span>
+            </h2>
+          </mat-grid-tile>
+          <mat-grid-tile [colspan]="2" [rowspan]="1" style="font-size:1.5vmax">Expense Summary</mat-grid-tile>
+          <mat-grid-tile [colspan]="1" [rowspan]="1">
+            <h2 style="text-align:center">
+              <span style="font-size: 2vmax">{{user.currency}} {{getDayStat()}}</span>
+              <br>
+              <span style="font-size: 50%">Over/Under</span>
+            </h2>
+          </mat-grid-tile>
+        </mat-grid-list>
+      </mat-tab>
+    </mat-tab-group>
   </mat-card>
+</ng-container>

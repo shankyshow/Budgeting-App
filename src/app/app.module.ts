@@ -18,6 +18,7 @@ import { ExpenseSummaryComponent } from './ui/expense-summary/expense-summary.co
 import { ExpenseAddComponent } from './ui/expense-add/expense-add.component';
 import { IncomeAddComponent } from './ui/income-add/income-add.component';
 import { DashboardSummaryComponent } from './ui/dashboard-summary/dashboard-summary.component';
+import { UserSettingsComponent } from './ui/user-settings/user-settings.component';
 
 @NgModule({
   declarations: [
@@ -29,7 +30,8 @@ import { DashboardSummaryComponent } from './ui/dashboard-summary/dashboard-summ
     ExpenseSummaryComponent,
     ExpenseAddComponent,
     IncomeAddComponent,
-    DashboardSummaryComponent
+    DashboardSummaryComponent,
+    UserSettingsComponent
   ],
   imports: [
     BrowserModule,

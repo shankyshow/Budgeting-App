@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as dashboard from '../../../ud/dashboard.json';
+import { AuthService } from '../../core/auth.service';
 
 @Component({
   selector: 'app-expense-summary',
@@ -8,13 +9,9 @@ import * as dashboard from '../../../ud/dashboard.json';
 })
 export class ExpenseSummaryComponent implements OnInit {
 
-  constructor() { }
+  constructor(public auth: AuthService) { }
 
   ngOnInit() {
-  }
-  // Preferred Active Tab Set by User
-  userTab(): number {
-    return (<any>dashboard).defTab;
   }
 
   /* EXPENSE SUMMARY Balance */

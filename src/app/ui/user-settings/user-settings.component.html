@@ -1,0 +1,53 @@
+<ng-container>
+  <mat-card class="user-settings">
+    <mat-grid-list cols="1" rowHeight="50px">
+      <mat-grid-tile [colspan]="1" [rowspan]="2">
+        <div class="separator-line"></div>
+        <div class="separator-text">Have you set your dashboard defaults?</div>
+        <div class="separator-line"></div>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="1" [rowspan]="4">
+        <form class="loginGrid" [formGroup]="userDefaultsForm">
+          <mat-form-field class="formFields">
+            <mat-select placeholder="Choose default dashboard tab" [(value)]="defTab">
+              <mat-option value=0>Year</mat-option>
+              <mat-option value=1>Month</mat-option>
+              <mat-option value=2>Week</mat-option>
+              <mat-option value=3>Bi-Week</mat-option>
+              <mat-option value=4>Day</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-form-field class="formFields">
+            <mat-select placeholder="Currency" [(value)]="currency">
+              <mat-option value="&curren;">&curren; Generic Currency Symbol</mat-option>
+              <mat-option value="&#8377;">&#8377; Indian Rupee</mat-option>
+              <mat-option value="$">$ Dollor</mat-option>
+              <mat-option value="&euro;">&euro; Euro</mat-option>
+              <mat-option value="&pound;">&pound; Pound Sterling</mat-option>
+              <mat-option value="&yen;">&yen; Yen</mat-option>
+              <mat-option value="&#8383;">&#8383; Bitcoin</mat-option>
+            </mat-select>
+          </mat-form-field>
+          <mat-radio-group [(value)]="dasboardSummaryOrder">
+            <mat-radio-button value="expInc" (change)="expInc()">Expense Summary<div class="separator-line"></div>Income Summary</mat-radio-button>
+            <mat-radio-button value="incExp" (change)="incExp()">Income Summary<div class="separator-line"></div>Expense Summary</mat-radio-button>
+          </mat-radio-group>
+        </form>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="1" [rowspan]="2">
+        <div class="separator-line"></div>
+        <div class="separator-text">You can always change these later again in your profile settings</div>
+        <div class="separator-line"></div>
+      </mat-grid-tile>
+      <mat-grid-tile [colspan]="1" [rowspan]="1">
+        <button mat-raised-button color="primary" (click)="userDefaultsOk()" class="emailButton" [disabled]="
+        !defTab ||
+        !currency ||
+        !dasboardSummaryOrder
+        ">
+          Done
+        </button>
+      </mat-grid-tile>
+    </mat-grid-list>
+  </mat-card>
+</ng-container>

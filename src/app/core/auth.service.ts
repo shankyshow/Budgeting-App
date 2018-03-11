@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { NotifyService } from './notify.service';
+import { UserInterface } from './ud/type-interface';
 
 import * as firebase from 'firebase/app';
 import { AngularFireAuth } from 'angularfire2/auth';
@@ -10,23 +11,10 @@ import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
 
 
-interface User {
-  uid: string;
-  email: string;
-  photoURL?: string;
-  displayName?: string;
-  firstName?: string;
-  lastName?: string;
-  defaultTab?: number;
-  expenseSummaryFirst?: boolean;
-  incomeSummaryFirst?: boolean;
-}
-
-
 @Injectable()
 export class AuthService {
 
-  user: Observable<User>;
+  user: Observable<UserInterface>;
 
   constructor(private afAuth: AngularFireAuth,
               private afs: AngularFirestore,
@@ -37,7 +25,7 @@ export class AuthService {
       this.user = this.afAuth.authState
         .switchMap(user => {
           if (user) {
-            return this.afs.doc<User>(`users/${user.uid}`).valueChanges();
+            return this.afs.doc<UserInterface>(`users/${user.uid}`).valueChanges();
           } else {
             return Observable.of(null);
           }
@@ -69,7 +57,7 @@ export class AuthService {
   }
 
   // Update properties on the user document
-  updateUser(user: User, data: any) {
+  updateUser(user: UserInterface, data: any) {
     return this.afs.doc(`users/${user.uid}`).update(data);
   }
 
@@ -83,8 +71,8 @@ export class AuthService {
   }
 
   private setUserDoc(user) {
-    const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
-    const data: User = {
+    const userRef: AngularFirestoreDocument<UserInterface> = this.afs.doc(`users/${user.uid}`);
+    const data: UserInterface = {
       uid: user.uid,
       email: user.email || null,
       firstName: user.firstName,
@@ -98,9 +86,9 @@ export class AuthService {
   private updateUserData(user) {
     // Sets user data to firestore on login
 
-    const userRef: AngularFirestoreDocument<User> = this.afs.doc(`users/${user.uid}`);
+    const userRef: AngularFirestoreDocument<UserInterface> = this.afs.doc(`users/${user.uid}`);
 
-    const data: User = {
+    const data: UserInterface = {
       uid: user.uid,
       email: user.email || null,
       displayName: user.displayName,

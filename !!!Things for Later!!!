@@ -13,3 +13,5 @@ SignUp Sheet:
 
 Add New Expense Screen:
     $ and Amount need to be seperated
+
+Firstname Lastname validators for only letters

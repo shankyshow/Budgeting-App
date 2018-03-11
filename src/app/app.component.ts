@@ -19,7 +19,7 @@ export class AppComponent {
     public router: Router,
     public exp: ExpenseService
   ) {
-    router.navigateByUrl('/login');
+    this.router.navigateByUrl('/login');
   }
 
   logout() {

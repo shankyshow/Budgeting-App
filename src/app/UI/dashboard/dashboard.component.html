@@ -1,124 +1,179 @@
 <ng-container *ngIf="auth.user | async as user">
-<mat-card class="primary">
-  <mat-grid-list cols="5" rowHeight="100px">
+  <mat-card class="primary">
+    <mat-grid-list cols="5" rowHeight="100px">
       <mat-grid-tile [colspan]="1" [rowspan]="1">
-          <button mat-icon-button [matMenuTriggerFor]="menu">
-              <mat-icon>menu</mat-icon>
+        <button mat-icon-button [matMenuTriggerFor]="menu">
+          <mat-icon>menu</mat-icon>
+        </button>
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item>
+            <mat-icon>money_off</mat-icon>
+            <span>Expense Log</span>
           </button>
-          <mat-menu #menu="matMenu">
-              <button mat-menu-item>
-                  <mat-icon>money_off</mat-icon>
-                  <span>Expense Log</span>
-              </button>
-              <button mat-menu-item>
-                  <mat-icon>attach_money</mat-icon>
-                  <span>Income  Log</span>
-              </button>
-              <button mat-menu-item>
-                      <mat-icon>account_circle</mat-icon>
-                      <span>Account</span>
-              </button>
-          </mat-menu>
+          <button mat-menu-item>
+            <mat-icon>attach_money</mat-icon>
+            <span>Income Log</span>
+          </button>
+          <button mat-menu-item>
+            <mat-icon>account_circle</mat-icon>
+            <span>Account</span>
+          </button>
+        </mat-menu>
       </mat-grid-tile>
       <mat-grid-tile [colspan]="3" [rowspan]="1">
-          <mat-card-header class="loginHeader">{{ user.firstName }}'s Dashboard</mat-card-header>
+        <mat-card-header class="loginHeader">{{ user.firstName }}'s Dashboard</mat-card-header>
       </mat-grid-tile>
       <mat-grid-tile [colspan]="1" [rowspan]="1">
-          <button mat-icon-button><mat-icon aria-label="Logout Button" (click)="logout();">power_settings_new</mat-icon></button>
+        <button mat-icon-button>
+          <mat-icon aria-label="Logout Button" (click)="logout();">power_settings_new</mat-icon>
+        </button>
       </mat-grid-tile>
-  </mat-grid-list>
-<!-- Balance Summary -->
-  <mat-card>
-    <mat-card-content>
-      <mat-tab-group headerPosition="below" selectedIndex="{{userTab()}}">
-        <mat-tab label="Year">
-          <mat-grid-list cols="3" rowHeight="100px">
-            <mat-grid-tile [colspan]="1" [rowspan]="1">
-                <a routerLink="/addincome"><button mat-icon-button color="primary">
-                    <mat-icon aria-label="Icon Button with a plus symbol">add</mat-icon>
-                  </button></a>
-            </mat-grid-tile>
-            <mat-grid-tile [colspan]="1" [rowspan]="1">
-              <h1 class="amount">${{getYearBal()}}<br><span style="font-size:50%">Balance</span></h1>
-            </mat-grid-tile>
-            <mat-grid-tile [colspan]="1" [rowspan]="1">
-                <a routerLink="/addexpense"><button mat-icon-button color="primary">
-                    <mat-icon aria-label="Icon Button with a minus symbol">remove</mat-icon>
-                  </button></a>
-            </mat-grid-tile>
-          </mat-grid-list>
-        </mat-tab>
-        <mat-tab label="Month">
-          <mat-grid-list cols="3" rowHeight="100px">
-              <mat-grid-tile [colspan]="1" [rowspan]="1">
-                  <a routerLink="/addincome"><button mat-icon-button color="primary">
+    </mat-grid-list>
+    <!-- Balance Summary -->
+    <ng-container *ngIf="
+  user.defTab &&
+  user.currency &&
+  user.dashboardSummaryOrder;
+  else showUserDefaults
+  ">
+      <mat-card>
+        <mat-card-content>
+          <mat-tab-group headerPosition="below" selectedIndex="{{userTab}}">
+            <mat-tab label="Year">
+              <mat-grid-list cols="3" rowHeight="100px">
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                  <a routerLink="/addincome">
+                    <button mat-icon-button color="primary">
                       <mat-icon aria-label="Icon Button with a plus symbol">add</mat-icon>
-                    </button></a>
-              </mat-grid-tile>
-              <mat-grid-tile [colspan]="1" [rowspan]="1">
-                <h1 class="amount">${{getMonthBal()}}<br><span style="font-size:50%">Balance</span></h1>
-              </mat-grid-tile>
-              <mat-grid-tile [colspan]="1" [rowspan]="1">
-                  <a routerLink="/addexpense"><button mat-icon-button color="primary">
-                    <mat-icon aria-label="Icon Button with a minus symbol">remove</mat-icon>
-                  </button></a>
-              </mat-grid-tile>
-            </mat-grid-list>
-          </mat-tab>
-        <mat-tab label="Week">
-          <mat-grid-list cols="3" rowHeight="100px">
-              <mat-grid-tile [colspan]="1" [rowspan]="1">
-                  <a routerLink="/addincome"><button mat-icon-button color="primary">
-                      <mat-icon aria-label="Icon Button with a plus symbol">add</mat-icon>
-                    </button></a>
-              </mat-grid-tile>
-              <mat-grid-tile [colspan]="1" [rowspan]="1">
-                <h1 class="amount">${{getWeekBal()}}<br><span style="font-size:50%">Balance</span></h1>
-              </mat-grid-tile>
-              <mat-grid-tile [colspan]="1" [rowspan]="1">
-                  <a routerLink="/addexpense"><button mat-icon-button color="primary">
+                    </button>
+                  </a>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                  <h1 class="amount">{{user.currency}} {{getYearBal()}}
+                    <br>
+                    <span style="font-size:50%">Balance</span>
+                  </h1>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                  <a routerLink="/addexpense">
+                    <button mat-icon-button color="primary">
                       <mat-icon aria-label="Icon Button with a minus symbol">remove</mat-icon>
-                    </button></a>
-              </mat-grid-tile>
-            </mat-grid-list>
-        </mat-tab>
-        <mat-tab label="Bi-Week">
-          <mat-grid-list cols="3" rowHeight="100px">
-              <mat-grid-tile [colspan]="1" [rowspan]="1">
-                  <a routerLink="/addincome"><button mat-icon-button color="primary">
+                    </button>
+                  </a>
+                </mat-grid-tile>
+              </mat-grid-list>
+            </mat-tab>
+            <mat-tab label="Month">
+              <mat-grid-list cols="3" rowHeight="100px">
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                  <a routerLink="/addincome">
+                    <button mat-icon-button color="primary">
                       <mat-icon aria-label="Icon Button with a plus symbol">add</mat-icon>
-                    </button></a>
-              </mat-grid-tile>
-              <mat-grid-tile [colspan]="1" [rowspan]="1">
-                <h1 class="amount">${{getBiWeekBal()}}<br><span style="font-size:50%">Balance</span></h1>
-              </mat-grid-tile>
-              <mat-grid-tile [colspan]="1" [rowspan]="1">
-                  <a routerLink="/addexpense"><button mat-icon-button color="primary">
+                    </button>
+                  </a>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                  <h1 class="amount">{{user.currency}} {{getMonthBal()}}
+                    <br>
+                    <span style="font-size:50%">Balance</span>
+                  </h1>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                  <a routerLink="/addexpense">
+                    <button mat-icon-button color="primary">
                       <mat-icon aria-label="Icon Button with a minus symbol">remove</mat-icon>
-                    </button></a>
-              </mat-grid-tile>
-            </mat-grid-list>
-        </mat-tab>
-        <mat-tab label="Day">
-          <mat-grid-list cols="3" rowHeight="100px">
-              <mat-grid-tile [colspan]="1" [rowspan]="1">
-                  <a routerLink="/addincome"><button mat-icon-button color="primary">
+                    </button>
+                  </a>
+                </mat-grid-tile>
+              </mat-grid-list>
+            </mat-tab>
+            <mat-tab label="Week">
+              <mat-grid-list cols="3" rowHeight="100px">
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                  <a routerLink="/addincome">
+                    <button mat-icon-button color="primary">
                       <mat-icon aria-label="Icon Button with a plus symbol">add</mat-icon>
-                    </button></a>
-              </mat-grid-tile>
-              <mat-grid-tile [colspan]="1" [rowspan]="1">
-                <h1 class="amount">${{getDayBal()}}<br><span style="font-size:50%">Balance</span></h1>
-              </mat-grid-tile>
-              <mat-grid-tile [colspan]="1" [rowspan]="1">
-                  <a routerLink="/addexpense"><button mat-icon-button color="primary">
+                    </button>
+                  </a>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                  <h1 class="amount">{{user.currency}} {{getWeekBal()}}
+                    <br>
+                    <span style="font-size:50%">Balance</span>
+                  </h1>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                  <a routerLink="/addexpense">
+                    <button mat-icon-button color="primary">
                       <mat-icon aria-label="Icon Button with a minus symbol">remove</mat-icon>
-                    </button></a>
-              </mat-grid-tile>
-            </mat-grid-list>
-        </mat-tab>
-      </mat-tab-group>
-    </mat-card-content>
+                    </button>
+                  </a>
+                </mat-grid-tile>
+              </mat-grid-list>
+            </mat-tab>
+            <mat-tab label="Bi-Week">
+              <mat-grid-list cols="3" rowHeight="100px">
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                  <a routerLink="/addincome">
+                    <button mat-icon-button color="primary">
+                      <mat-icon aria-label="Icon Button with a plus symbol">add</mat-icon>
+                    </button>
+                  </a>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                  <h1 class="amount">{{user.currency}} {{getBiWeekBal()}}
+                    <br>
+                    <span style="font-size:50%">Balance</span>
+                  </h1>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                  <a routerLink="/addexpense">
+                    <button mat-icon-button color="primary">
+                      <mat-icon aria-label="Icon Button with a minus symbol">remove</mat-icon>
+                    </button>
+                  </a>
+                </mat-grid-tile>
+              </mat-grid-list>
+            </mat-tab>
+            <mat-tab label="Day">
+              <mat-grid-list cols="3" rowHeight="100px">
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                  <a routerLink="/addincome">
+                    <button mat-icon-button color="primary">
+                      <mat-icon aria-label="Icon Button with a plus symbol">add</mat-icon>
+                    </button>
+                  </a>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                  <h1 class="amount">{{user.currency}} {{getDayBal()}}
+                    <br>
+                    <span style="font-size:50%">Balance</span>
+                  </h1>
+                </mat-grid-tile>
+                <mat-grid-tile [colspan]="1" [rowspan]="1">
+                  <a routerLink="/addexpense">
+                    <button mat-icon-button color="primary">
+                      <mat-icon aria-label="Icon Button with a minus symbol">remove</mat-icon>
+                    </button>
+                  </a>
+                </mat-grid-tile>
+              </mat-grid-list>
+            </mat-tab>
+          </mat-tab-group>
+        </mat-card-content>
+      </mat-card>
+      <ng-container *ngIf="user.dashboardSummaryOrder === 'expInc'" ; else #viceversa>
+        <app-expense-summary></app-expense-summary>
+        <app-income-summary></app-income-summary>
+      </ng-container>
+      <ng-template #viceversa>
+        <app-income-summary></app-income-summary>
+        <app-expense-summary></app-expense-summary>
+      </ng-template>
+    </ng-container>
+    <!-- User Settings Form -->
+    <ng-template #showUserDefaults>
+      <app-user-settings></app-user-settings>
+    </ng-template>
   </mat-card>
-</mat-card>
-<router-outlet></router-outlet>
 </ng-container>

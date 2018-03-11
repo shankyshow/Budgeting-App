@@ -5,9 +5,9 @@ export interface UserInterface {
     displayName?: string;
     firstName?: string;
     lastName?: string;
-    defaultTab?: number;
-    expenseSummaryFirst?: boolean;
-    incomeSummaryFirst?: boolean;
+    defTab?: number;
+    currency?: string;
+    dasboardSummaryOrder?: string;
 }
 
 export interface NewUserInterface {
@@ -15,6 +15,12 @@ export interface NewUserInterface {
     lastName: string;
     email: string;
     password: string;
+}
+
+export interface UserDefaultsInterface {
+    defTab: number;
+    currency: string;
+    dashboardSummaryOrder: string;
 }
 
 export interface ExpenseInterface {

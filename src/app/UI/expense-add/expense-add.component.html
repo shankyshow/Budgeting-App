@@ -1,15 +1,14 @@
 <div *ngIf="thisPage">
-    <mat-card class="primary">
-    <mat-grid-list cols="5" rowHeight="100px">
-        <mat-grid-tile [colspan]="1" [rowspan]="1">
-            <button mat-icon-button (click)="doGoBack();">
-                <mat-icon aria-label="Go Back">keyboard_arrow_left</mat-icon>
-            </button>
-        </mat-grid-tile>
-        <mat-grid-tile [colspan]="3" [rowspan]="1">$ {{ expenseTotal }}</mat-grid-tile>
-    </mat-grid-list>
-</mat-card>
-    <mat-grid-list cols="1" rowHeight="80px">
+        <mat-grid-list cols="5" rowHeight="100px">
+            <mat-grid-tile [colspan]="1" [rowspan]="1">
+                <button mat-icon-button (click)="doGoBack();">
+                    <mat-icon aria-label="Go Back">keyboard_arrow_left</mat-icon>
+                </button>
+            </mat-grid-tile>
+            <mat-grid-tile [colspan]="3" [rowspan]="1">$ {{ expenseTotal }}</mat-grid-tile>
+        </mat-grid-list>
+        <mat-card>
+    <mat-grid-list cols="1" rowHeight="80px" style="background-color:white">
         <mat-grid-tile [colspan]="1" [rowspan]="8">
             <div class="loginGrid">
                 <mat-form-field class="formFields">
@@ -62,6 +61,7 @@
             </div>
         </mat-grid-tile>
     </mat-grid-list>
+</mat-card>
 </div>
 <div *ngIf="!thisPage">
     <router-outlet></router-outlet>

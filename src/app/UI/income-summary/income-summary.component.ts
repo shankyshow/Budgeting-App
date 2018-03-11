@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import * as dashboard from '../../../ud/dashboard.json';
+import { AuthService } from '../../core/auth.service';
 
 @Component({
   selector: 'app-income-summary',
@@ -12,7 +13,7 @@ export class IncomeSummaryComponent implements OnInit {
     return (<any>dashboard).defTab;
   }
 
-  constructor() { }
+  constructor(public auth: AuthService) { }
 
   ngOnInit() {
   }
