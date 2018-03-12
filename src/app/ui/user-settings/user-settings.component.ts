@@ -3,6 +3,7 @@ import {FormBuilder, FormGroup, Validators} from '@angular/forms';
 import { AuthService } from '../../core/auth.service';
 import { UserDefaultsInterface, UserInterface } from '../../core/ud/type-interface';
 import { AngularFireAuth } from 'angularfire2/auth';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-user-settings',
@@ -28,7 +29,8 @@ export class UserSettingsComponent implements OnInit {
   constructor(
     fb: FormBuilder,
     public auth: AuthService,
-    private afAuth: AngularFireAuth
+    private afAuth: AngularFireAuth,
+    public router: Router
   ) { }
 
   ngOnInit() {
@@ -45,6 +47,7 @@ export class UserSettingsComponent implements OnInit {
       email: this.afAuth.auth.currentUser.email
     };
     this.auth.updateUser(userDetails, userDefaults);
+    this.router.navigateByUrl('/dashboard');
   }
 
 }

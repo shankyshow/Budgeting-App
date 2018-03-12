@@ -33,6 +33,10 @@ export class DashboardComponent implements OnInit {
 */
   }
 
+  showUserDefaults() {
+    this.router.navigateByUrl('/usersettings');
+  }
+
 /* MAIN BALANCE Summary */
   getYearBal(): number {
     return (<any>dashboard).yearBal;
