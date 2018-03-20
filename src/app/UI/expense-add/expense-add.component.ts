@@ -1,9 +1,9 @@
 import { Component, OnInit, Input } from '@angular/core';
 import { Router } from '@angular/router';
 import { FormControl, Validators } from '@angular/forms';
-import * as dashboard from '../../../ud/dashboard.json';
-import { AddExpenseInterface } from '../../core/ud/type-interface';
-import { ExpenseService } from '../../core/ud/expense.service';
+import { AddExpenseInterface, UserBalInterface } from '../../core/ud/type-interface';
+import { AuthService } from '../../core/auth.service';
+import { AngularFireAuth } from 'angularfire2/auth';
 
 @Component({
   selector: 'app-expense-add',
@@ -16,7 +16,7 @@ export class ExpenseAddComponent implements OnInit {
 
   expenseTotal = 0;
 
-  addExpDate: string;
+  addExpDate = new Date();
   addExpType: string;
   addExpDesc: string;
   addExpDatefc = new FormControl(new Date());
@@ -45,12 +45,7 @@ export class ExpenseAddComponent implements OnInit {
     this.cardTypedisabled = false;
   }
 
-// User selected Currency
-  userCurrency(): string {
-    return (<any>dashboard).selectedCurrency;
-  }
-
-  constructor(private router: Router, public exp: ExpenseService) {}
+  constructor(private router: Router, public auth: AuthService, public afAuth: AngularFireAuth) {}
 
   doGoBack() {
     this.thisPage = false;
@@ -62,6 +57,9 @@ export class ExpenseAddComponent implements OnInit {
 
   submitAddNewExp(data) {
     this.thisPage = true;
+    const user: UserBalInterface = {
+      uid: this.afAuth.auth.currentUser.uid
+    };
     const newExpense: AddExpenseInterface = {
       date: this.addExpDate,
       expenseType: this.addExpType,
@@ -71,7 +69,7 @@ export class ExpenseAddComponent implements OnInit {
       payType: this.addExpPayType,
       cardType: this.addExpCardType
     };
-    this.exp.addExpense(newExpense);
+    this.auth.addExpense(user, newExpense);
   }
 
 }

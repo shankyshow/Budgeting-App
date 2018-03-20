@@ -1,3 +1,4 @@
+<ng-container *ngIf="auth.user | async as user">
 <div *ngIf="thisPage">
         <mat-grid-list cols="5" rowHeight="100px">
             <mat-grid-tile [colspan]="1" [rowspan]="1">
@@ -5,7 +6,7 @@
                     <mat-icon aria-label="Go Back">keyboard_arrow_left</mat-icon>
                 </button>
             </mat-grid-tile>
-            <mat-grid-tile [colspan]="3" [rowspan]="1">$ {{ expenseTotal }}</mat-grid-tile>
+            <mat-grid-tile [colspan]="3" [rowspan]="1">{{user.currency}} {{ expenseTotal }}</mat-grid-tile>
         </mat-grid-list>
         <mat-card>
     <mat-grid-list cols="1" rowHeight="80px" style="background-color:white">
@@ -29,7 +30,7 @@
                 </mat-form-field>
                 <mat-form-field class="formFields">
                     <input matInput placeholder="Amount" type="number" [formControl]="addExpAmountfc" class="amount" [(ngModel)]="addExpAmount">
-                    <span matPrefix>{{userCurrency()}}</span>
+                    <span matPrefix>{{user.currency}} </span>
                     <mat-error *ngIf="addExpAmountfc.hasError('required')">Amount cannot be empty!</mat-error>
                     <mat-hint>{{addExpAmountfc.value?.sound}}</mat-hint>
                 </mat-form-field>
@@ -63,6 +64,7 @@
     </mat-grid-list>
 </mat-card>
 </div>
+</ng-container>
 <div *ngIf="!thisPage">
     <router-outlet></router-outlet>
 </div>

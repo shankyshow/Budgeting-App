@@ -27,7 +27,6 @@ export class ExpenseService {
     const newid = this.afs.createId();
     const newExpense: ExpenseInterface = {
       id: newid,
-      uid: this.afAuth.auth.currentUser.uid,
       date: data.date,
       expenseType: data.expenseType,
       description: data.description,

@@ -1,11 +1,11 @@
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { NotifyService } from './notify.service';
-import { UserInterface } from './ud/type-interface';
+import { UserInterface, ExpenseInterface, UserBalInterface, AddExpenseInterface, TimeBalance } from './ud/type-interface';
 
 import * as firebase from 'firebase/app';
 import { AngularFireAuth } from 'angularfire2/auth';
-import { AngularFirestore, AngularFirestoreDocument } from 'angularfire2/firestore';
+import { AngularFirestore, AngularFirestoreDocument, AngularFirestoreCollection } from 'angularfire2/firestore';
 
 import { Observable } from 'rxjs/Observable';
 import 'rxjs/add/operator/switchMap';
@@ -15,6 +15,16 @@ import 'rxjs/add/operator/switchMap';
 export class AuthService {
 
   user: Observable<UserInterface>;
+
+  expenseCollection: AngularFirestoreCollection<ExpenseInterface>;
+  expense: Observable<ExpenseInterface[]>;
+
+  dayBal: number;
+  weekBal: number;
+  biweekBal: number;
+  monthBal: number;
+  yearBal: number;
+  today = new Date();
 
   constructor(private afAuth: AngularFireAuth,
               private afs: AngularFirestore,
@@ -30,6 +40,70 @@ export class AuthService {
             return Observable.of(null);
           }
         });
+
+      this.user.subscribe((userBal) => {
+    // Daily Balance Check //
+        if (userBal.daily.dayBal == null || userBal.daily.day !== this.today.getDay()) {
+          this.dayBal = 0;
+          const balances: UserBalInterface = {
+            uid: userBal.uid,
+            daily: {day: this.today.getDay(), dayBal: this.dayBal}
+          };
+          this.afs.doc(`users/${userBal.uid}`).update(balances);
+        } else {
+          this.dayBal = userBal.daily.dayBal;
+        }
+/*
+    // Weekly Balance Check //
+        if (userBal.weekly.weekBal == null || userBal.weekly.week !== this.today.getWeek() {
+          this.weekBal = 0;
+          const balances: UserBalInterface = {
+            uid: userBal.uid,
+            weekly: {week: this.today.getWeek(), weekBal: this.weekBal}
+          };
+          this.afs.doc(`users/${userBal.uid}`).update(balances);
+        } else {
+          this.weekBal = userBal.weekly.weekBal;
+        }
+
+    // Bi-Weekly Balance Check //
+        if (userBal.biweekly.biweekBal == null || userBal.biweekly.biweek !== this.today.getBiweek()) {
+          this.biweekBal = 0;
+          const balances: UserBalInterface = {
+            uid: userBal.uid,
+            biweekly: {biweek: this.today.getBiweek(), biweekBal: this.biweekBal}
+          };
+          this.afs.doc(`users/${userBal.uid}`).update(balances);
+        } else {
+          this.biweekBal = userBal.biweekly.biweekBal;
+        } */
+
+    // Monthly Balance Check //
+        if (userBal.monthly.monthBal == null || userBal.monthly.month !== this.today.getMonth()) {
+          this.monthBal = 0;
+          const balances: UserBalInterface = {
+            uid: userBal.uid,
+            monthly: {month: this.today.getMonth(), monthBal: this.monthBal}
+          };
+          this.afs.doc(`users/${userBal.uid}`).update(balances);
+        } else {
+          this.monthBal = userBal.monthly.monthBal;
+        }
+/*
+    // Yearly Balance Check //
+        if (userBal.yearly.yearBal == null || userBal.yearly.year !== this.today.getYear() {
+          this.yearBal = 0;
+          const balances: UserBalInterface = {
+            uid: userBal.uid,
+            yearly: {year: this.today.getYear(), yearBal: this.yearBal}
+          };
+          this.afs.doc(`users/${userBal.uid}`).update(balances);
+        } else {
+          this.yearBal = userBal.yearly.yearBal;
+        }
+
+*/
+      });
   }
 
   emailSignUp(data) {
@@ -37,6 +111,7 @@ export class AuthService {
       .then(user => {
         user.firstName = data.firstName;
         user.lastName = data.lastName;
+        user.dayBal = 0;
         return this.setUserDoc(user); // create initial user document
       })
       .catch(error => this.handleError(error) );
@@ -76,7 +151,7 @@ export class AuthService {
       uid: user.uid,
       email: user.email || null,
       firstName: user.firstName,
-      lastName: user.lastName
+      lastName: user.lastName,
     };
 
     return userRef.set(data);
@@ -110,5 +185,32 @@ export class AuthService {
   private handleError(error) {
     console.error(error);
     this.notify.update(error.message, 'error');
+  }
+
+  addExpense(user: UserBalInterface, data: AddExpenseInterface) {
+
+// Aggregate Day Balance on every add expense //
+    if (data.date.getDay() === this.today.getDay()) {
+      const newDayBal = this.dayBal + data.amount;
+
+      const balances: UserBalInterface = {
+        uid: user.uid,
+        daily: {day: data.date.getDay(), dayBal: newDayBal}
+      };
+      this.afs.doc(`users/${user.uid}`).update(balances);
+    }
+
+    const expId = this.afs.createId();
+    const newExpense: ExpenseInterface = {
+      id: expId,
+      date: data.date,
+      expenseType: data.expenseType,
+      description: data.description,
+      amount: data.amount,
+      shares: data.shares,
+      payType: data.payType,
+      cardType: data.cardType
+    };
+    return this.afs.doc(`users/${user.uid}/expenses/${expId}`).set(newExpense);
   }
 }

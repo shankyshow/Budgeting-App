@@ -8,6 +8,11 @@ export interface UserInterface {
     defTab?: number;
     currency?: string;
     dasboardSummaryOrder?: string;
+    daily?: {day: number, dayBal: number};
+    weekly?: {week: number, weekBal: number};
+    biweekly?: {biweek: number, biweekBal: number};
+    monthly?: {month: number, monthBal: number};
+    yearly?: {year: number, yearBal: number};
 }
 
 export interface NewUserInterface {
@@ -23,10 +28,23 @@ export interface UserDefaultsInterface {
     dashboardSummaryOrder: string;
 }
 
+export interface UserBalInterface {
+    uid: string;
+    daily?: {day: number, dayBal: number};
+    weekly?: {week: number, weekBal: number};
+    biweekly?: {biweek: number, biweekBal: number};
+    monthly?: {month: number, monthBal: number};
+    yearly?: {year: number, yearBal: number};
+}
+
+export interface TimeBalance {
+    period: number;
+    balance: number;
+}
+
 export interface ExpenseInterface {
     id: string;
-    uid: string;
-    date: string;
+    date: Date;
     expenseType: string;
     description: string;
     amount: number;
@@ -36,7 +54,7 @@ export interface ExpenseInterface {
 }
 
 export interface AddExpenseInterface {
-    date: string;
+    date: Date;
     expenseType: string;
     description: string;
     amount: number;
